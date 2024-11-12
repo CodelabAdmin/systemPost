@@ -360,4 +360,10 @@ class suppliersModel
          ];
       }
    }
+
+   public function countSuppliers() {
+      $query = "SELECT COUNT(*) FROM suppliers";
+      $result = $this->conn->query($query);
+      return $result->fetch_assoc();
+   }
 }

@@ -10,6 +10,8 @@
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $response = $suppliers->readById($id);
+        }else if ($_SERVER['REQUEST_URI'] === '/suppliers/count'){
+            $response = $suppliers->countSuppliers();
         } else {
             $response = $suppliers->readAll();
         }
