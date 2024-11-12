@@ -1,0 +1,669 @@
+@import url('./ventas.css');
+@import url('./inventario.css');
+@import url('./productos.css');
+@import url('./empleados.css');
+@import url('./modal.css');
+@import url('./proveedores.css');
+/* estilos de aside del login */
+
+.container-aside-login {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container-aside-login .container1 {
+    border-radius: 50%;
+    background: linear-gradient(to left, #FDA4AC, #FEADB9);
+    height: 300px;
+    width: 300px;
+    display: flex;
+    position: absolute;
+    top: -160px;
+    right: 150px;
+    z-index: 120;
+}
+
+.container-aside-login .container2 {
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #1B2597, #04073C);
+    transform: rotate(45deg);
+    height: 220px;
+    width: 220px;
+    display: flex;
+    position: absolute;
+    top: -35px;
+    right: -30px;
+}
+
+.container-aside-login .container3 {
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #09A5B2, #006271);
+    transform: rotate(45deg);
+    height: 220px;
+    width: 220px;
+    display: flex;
+    position: absolute;
+    left: -110px;
+    top: 50%;
+}
+
+.container-aside-login .container4 {
+    border-radius: 50%;
+    background: linear-gradient(to bottom, #09A5B2, #006271);
+    transform: rotate(0deg);
+    height: 50px;
+    width: 50px;
+    display: flex;
+    position: absolute;
+    right: 70px;
+    bottom: 90px;
+}
+
+.container-aside-login .container5 {
+    border-radius: 50%;
+    background-color: #FEADB9;
+    transform: rotate(45deg);
+    height: 180px;
+    width: 180px;
+    display: flex;
+    position: absolute;
+    right: -60px;
+    bottom: -45px;
+}
+
+.container-aside-login .container-info-aside {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    position: fixed;
+    bottom: 35px;
+}
+
+.container-aside-login .container-logo {
+    width: 210px;
+    height: 210px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container-aside-login .container-logo .codelab {
+    font-size: 45px;
+    font-weight: 600;
+}
+
+
+/* estilos de loginForm */
+
+
+.login-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.login-container .login-header {
+    width: 300px;
+    height: 50px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.login-container .login-header .login-title {
+    font-size: 40px;
+    font-weight: 400;
+    font-weight: bold;
+}
+
+.login-container .login-form {
+    width: 300px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container .login-form .input-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-container .login-form .input-group .input-field {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+.login-container .login-form .input-group .password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.login-container .login-form .input-group .password-container .input-password {
+    padding-right: 40px;
+}
+
+
+.login-container .login-form .input-group .password-container .icon-password {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 10px;
+    bottom: 26px;
+    cursor: pointer;
+}
+
+.login-container .login-form .remember-me {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.login-container .login-form .remember-me .checkbox-mark {
+    accent-color: rgb(115, 236, 226);
+}
+
+.login-container .login-form .remember-me .checkbox {
+    font-size: 15px;
+    color: gray;
+}
+
+.login-container .login-form .login-button {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container .login-form .login-button .button {
+    width: 60%;
+    padding: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 40px;
+    cursor: pointer;
+    background-color: rgb(115, 236, 226);
+}
+
+.login-container .login-form .login-button .button:hover {
+    background-color: rgb(28, 183, 203);
+    transition: background-color 0.3s ease;
+}
+
+.login-container .login-form .content-forgot-password {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+}
+
+.login-container .login-form .content-forgot-password .forgot-password {
+    margin-top: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    padding-left: 6px;
+    text-align: center;
+}
+
+.login-container .login-form .login-button #btn_disabled{
+    display: none;
+}
+
+
+
+
+/* estilos de layout */
+
+.layout {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.layout .layout-aside {
+    width: 60px;
+    height: 100%;
+    background-color: #bdc3c7;
+}
+
+.layout .layout-section {
+    width: calc(100% - 60px);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.layout .layout-section .layout-section-header {
+    width: 100%;
+    height: 60px;
+    background-color: #95a5a6;
+}
+
+.layout .layout-section .layout-section-content {
+    width: 100%;
+    height: calc(100% - 60px);
+    background-color: #ecf0f1;
+}
+
+
+/* estilos de login */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.page-login {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.page-login .page-login-aside {
+    width: 50%;
+    height: 100%;
+    background-color: #E6E6F0;
+
+}
+
+.page-login .page-login-form {
+    width: 50%;
+    height: 100%;
+    background-color: aquamarine;
+}
+
+.poppins {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+
+/* estilos de categorias */
+
+.category-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 15px;
+    gap: 20px;
+    font-family: Arial;
+}
+
+.category-container .category-item {
+    min-width: 130px;
+    display: flex;
+    flex-direction: column;
+    text-align: row;
+    justify-content: row;
+    align-items: row;
+    padding: 10px;
+    gap: 8px;
+    background-color: #E5EBF4;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 20px;
+    border-radius: 5px;
+    padding-bottom: 12px;
+    color: #888;
+}
+
+.category-container .category-item:hover {
+    background-color: #E5EBF4;
+    transform: scale(1.05);
+}
+
+.category-container .active {
+    background-color: #E5EBF4;
+}
+
+.category-container .category-item .content-icon {
+    width: 40px;
+    height: 40px;
+}
+
+
+
+/* estilos de header */
+
+
+.header {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 26px;
+    font-family: Arial;
+}
+
+.header .content-profile {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    gap: 25px;
+    align-items: center;
+}
+
+.header .content-profile .content-icon-1 .icon-lock {
+    width: 28px;
+    height: 28px;
+    color: black;
+}
+
+.header .content-profile .profile {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    position: relative;
+}
+
+.header .content-profile .profile .name-profile {
+    cursor: pointer;
+}
+
+.header .content-profile .profile .content-icon-2 .icon-row {
+    width: 18px;
+    height: 12px;
+    color: black;
+}
+
+.header .content-profile .profile .circle-profile {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: gray;
+}
+
+
+.header .content-profile .profile .dropdown-content {
+    position: absolute;
+    width: 130px;
+    top: 45px;
+    left: 50px;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header .content-profile .profile .dropdown-content a {
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+    text-align: start;
+    color: black;
+}
+
+.header .content-profile .profile .dropdown-content a:hover {
+    background-color: rgb(232, 231, 231);
+    font-weight: 600;
+}
+
+
+/* estilos de menu */
+
+
+.component-menu {
+    width: 60px;
+    height: 100vh;
+    background-color: #3f4b6b;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;/* aqui*15*/
+    position: relative;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.component-menu .menu-logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1px; 
+    padding-right: 5px;
+}
+.component-menu .menu-logo img {
+    width: 50px;
+    height: 50px; 
+}
+
+.component-menu .menu-options {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    padding-bottom: 30px; 
+    padding-right: 4px;
+}
+
+.component-menu .menu-options .option {
+    margin: 12px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.component-menu .menu-options .option svg {
+    width: 30px;
+    height: 30px;
+    stroke: white;
+    transition: stroke 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+.component-menu .menu-options .option:hover svg {
+    stroke: #99A5E0;
+    transform: scale(1.1);
+}
+
+
+/* estilos de tabla */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 530px;
+    flex-direction: column;
+    max-width: 1200px;
+}
+
+.container .table-container {
+    /* min-width: 100%; */
+    max-width: 1200px;
+    overflow-y: auto;
+    overflow-x: auto;
+    max-height: 500px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-top: 8px;
+    border-radius: 8px;
+}
+
+.container .table-container .product-table {
+    min-width: 100%;
+    table-layout: auto;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.container .table-container .product-table thead tr {
+    background-color: #e5e7eb;
+    text-align: left;
+    color: #4b5563;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+.container .table-container .product-table th {
+    padding: 8px 24px;
+}
+
+.container .table-container .product-table td {
+    padding: 12px 24px;
+}
+
+.container .table-container .product-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.container .table-container .product-table tbody tr:hover {
+    background-color: #f3f4f6;
+}
+
+.container .table-container .product-table .text-center {
+    text-align: center;
+}
+
+.container .table-container .product-table .status-active {
+    background-color: #99A5E0;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-size: 14px;
+}
+
+.container .table-container .product-table .status-inactive {
+    background-color: #fecaca;
+    color: #b91c1c;
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-size: 14px;
+}
+
+.container .table-container .product-table .acciones {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.container .table-container .product-table .content-actions {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .table-container .product-table .acciones .btn-accions {
+    width: 40px;
+    height: 40px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    background-color: #E6EBF9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6668C5;
+    transition: all 0.3s ease;
+}
+
+.container .table-container .product-table .acciones .btn-accions:hover {
+    background-color: #6668C5;
+    color: #E6EBF9;
+}
+
+.container .table-container .product-table .acciones .btn-accions .icon {
+    width: 24px;
+    height: 24px;
+}
+
+
+/* paginador de la tabla */
+
+.container .container-pagination {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.container .container-pagination .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.container .container-pagination .pagination a {
+    text-decoration: none;
+    color: #47488C;
+    padding: 8px 12px;
+    margin: 0 2px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container .container-pagination .pagination .pagination-number {
+    background-color: #E6EBF9;
+}
+
+.container .container-pagination .pagination .pagination-number.active {
+    background-color: #5555AD;
+    color: white;
+}
+
+.container .container-pagination .pagination .pagination-arrow {
+    background-color: #edf2f7;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container .container-pagination .pagination .pagination-arrow.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.container .container-pagination .pagination a:hover:not(.active):not(.disabled) {
+    background-color: #D2DCF3;
+}
+
+.container .container-pagination .pagination .pagination-arrow .icon-paginator {
+    width: 24px;
+    height: 24px;
+    color: #5555AD;
+}
+
+.container-Table-productos{
+    width: 100%;
+    height: 100%;
+    
+}
+
