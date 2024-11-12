@@ -36,7 +36,7 @@ async function obtener_datos(email, pass){
             },
             body: JSON.stringify(datos)
         }
-        let res = await fetch("https://codelabacademy.online/api/login", config)
+        let res = await fetch("http://localhost/server/systemPost/api/login", config)
         let data = await res.json()
         if(data.status === "success"){
             $.ajax({
