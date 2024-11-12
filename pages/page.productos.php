@@ -24,7 +24,7 @@
                         </svg>
                     </div>
                     <div class="number-counter">
-                        18
+                        <span id="countProducts"></span>
                     </div>
                 </div>
                 <div class="title-counter">

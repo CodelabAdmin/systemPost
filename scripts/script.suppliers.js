@@ -1,5 +1,5 @@
 $(document).ready(async function () {
-  $("#countProducts").html('<i class="fas fa-spinner fa-spin"></i>');
+  $("#countSuppliers").html('<i class="fas fa-spinner fa-spin"></i>');
   let count = await countSuppliers();
   $("#countSuppliers").html(count.count);
 });
