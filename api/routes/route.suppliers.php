@@ -23,6 +23,13 @@
       }
    }
 
+   $AppRoutes->AddRoutes('GET', 'suppliers/count', function() {
+      require_once 'models/suppliers.php';
+      $suppliers = new suppliersModel();
+      $response = $suppliers->countSuppliers();
+      echo json_encode($response);
+   });
+   
    $AppRoutes->AddRoutes('GET', 'suppliers', function() {
       require_once 'models/suppliers.php';
       $suppliers = new suppliersModel();
