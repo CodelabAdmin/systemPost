@@ -1,3 +1,19 @@
+<?php
+function countProducts()
+{
+    try {
+        $url = "http://localhost/server/systemPost/api/inventories/products/count";
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        return ['count' => $data["total"]];
+    } catch (Exception $e) {
+        return ['count' => 0];
+    }
+}
+$countProducts = countProducts();
+?>
+
 <div class="page-inventario">
     <div class="container-header-inventario">
         <div class="content-info-inventario">
@@ -17,7 +33,7 @@
                         </svg>
                     </div>
                     <div class="number-counter-inventario">
-                        30
+                    <?php echo $countProducts['count']; ?>
                     </div>
                 </div>
                 <div class="title-counter-inventario">

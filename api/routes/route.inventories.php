@@ -13,6 +13,13 @@ $AppRoutes->AddRoutes('GET', 'inventories/sales', function () {
     echo json_encode($response);
 });
 
+$AppRoutes->AddRoutes('GET', 'inventories/products/count', function () {
+    require_once 'models/inventories.php';
+    $inventories = new inventoriesModel();
+    $response = $inventories->countProducts();
+    echo json_encode($response);
+});
+
 $AppRoutes->AddRoutes('GET', 'inventories/products', function () {
     require_once 'models/inventories.php';
     $inventories = new inventoriesModel();

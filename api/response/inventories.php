@@ -43,6 +43,9 @@ if ($request == 'GET') {
                     $response = $inventories->readAllSuppliers();
                 }
                 break;
+            case 'products/count':
+                $response = $inventories->countProducts();
+                break;    
         }
     }
     echo json_encode($response);
