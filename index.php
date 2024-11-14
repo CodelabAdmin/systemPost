@@ -36,7 +36,7 @@ error_reporting(E_ALL);
     ?>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/apiManager.js"></script>
-    <script src="scripts/script.products.js"></script>
+    <script type="module" src="scripts/script.notify.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="assets/js/app.js"></script>
     <?php
