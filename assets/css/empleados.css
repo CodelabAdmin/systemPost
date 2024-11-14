@@ -94,3 +94,39 @@
     width: 1200px;
     height: 550px;
 }
+
+.page-empleados .container-header-empleados .buttom{
+    width: 100px;
+    height: 30px;
+    background-color: #6668C5;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.content-modal .content-modal-container .content-info-empleados .content-input-form .input{
+    width: 84%;
+    height: 30px;
+    outline: none;
+    border: 2px solid rgb(212, 212, 212);
+    border-radius: 5px;
+    font-size: 16px;
+    display: flex;
+    margin: 5px;
+
+}
+
+.content-modal .content-modal-container .content-info-empleados .content-input-form2 .input{
+    width: 40%;
+    height: 30px;
+    outline: none;
+    border: 2px solid rgb(212, 212, 212);
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 5px;
+}

@@ -10,6 +10,7 @@
             permitiendo registrar, autenticar y administrar sus datos de manera segura. Facilita la creación, modificación, 
             eliminación y consulta de usuarios, y controla el acceso según roles asignados.
             </div>
+            <div class="buttom" onClick="toggleModal()">+ Crear</div>
         </div>
         <div class="content-counter-empleados">
             <div class="content-info-counter-empleados">
@@ -35,4 +36,5 @@
             <?php require('./components/Table/Table.empleados.php') ?>   
         </div>
     </div>
+    <?php require('components/Modal/Modal-empleados.php') ?>
 </div>
