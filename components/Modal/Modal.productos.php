@@ -12,24 +12,23 @@
                 </div>
             </div>
         </div>
-        <div class="content-info">
-            <form id="product-form" class="product-form">
-               <div  class="container-form-modal">
-                    <textarea placeholder="Descripción" name="descripción" class="input-modal-product textarea"></textarea>
-                    <input type="text" placeholder="Nombre" name="Nombre" class="input-modal-product">
-                    <input type="num" placeholder="Stock" name="stock" class="input-modal-product">
-               </div>
-               <div class="container-form-modal">
-                  <input type="num" placeholder="Precio" name="precio" class="input-modal-product">
-                  <input type="text" placeholder="Categoria" name="categoria" class="input-modal-product">
-                  <input type="date" placeholder="Fecha de Actualización" name="descripcion" class="input-modal-product">
-               </div>
-            </form>
-        </div>
+        <form id="product-form" class="content-form">
+            <div class="container-product">
+                <div class="column">
+                    <input type="tetx" placeholder="Nombre" name="nombre" class="input-product">
+                    <input type="num" placeholder="Precio" name="precio" class="input-product">
+                    <input type="num" placeholder="Stock" name="stock" class="input-product">
+                    <input type="date" placeholder="" name="fecha" class="input-product date">
+                </div>
+                <div class="column">
+                    <input type="tetx" placeholder="Categoría" name="categoria" class="input-product">
+                    <textarea placeholder="Descripción" name="descripcion" class="input-product textarea"></textarea>
+                </div>
+            </div>
+        </form>
         <div class="content-buttons-product">
             <div class="btn-modal button-cancel-product" onclick='toggleModal()'>Cancelar</div>
             <div class="btn-modal button-confirm-product">Agregar</div>
-            </div>
         </div>
     </div>
 </div>
