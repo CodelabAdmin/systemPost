@@ -7,18 +7,17 @@
                 <div class="title">Agregar Producto</div>
                 <div class="close-modal" onclick='toggleModal()' >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cancel-icon-modal">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
                     </svg>
                 </div>
             </div>
         </div>
         <div class="content-info">
-            <form id="product-form">
+            <form id="product-form" class="product-form">
                <div  class="container-form-modal">
-                  <input type="int" placeholder="Id Producto" name="id_producto " class="input-modal-product" disabled>
-                  <input type="text" placeholder="Descripción" name="descripción" class="input-modal-product">
-                  <input type="text" placeholder="Nombre" name="Nombre" class="input-modal-product">
-                  <input type="num" placeholder="Stock" name="stock" class="input-modal-product">
+                    <textarea placeholder="Descripción" name="descripción" class="input-modal-product textarea"></textarea>
+                    <input type="text" placeholder="Nombre" name="Nombre" class="input-modal-product">
+                    <input type="num" placeholder="Stock" name="stock" class="input-modal-product">
                </div>
                <div class="container-form-modal">
                   <input type="num" placeholder="Precio" name="precio" class="input-modal-product">

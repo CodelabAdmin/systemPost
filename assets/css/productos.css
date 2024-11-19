@@ -105,7 +105,8 @@
     height: 550px;
 }
 
-.btn-add-product {
+/*estilos btn crear producto*/
+.page-productos .container-productos .content-info .btn-add-product {
     width: 120px;
     height: 40px;
     background-color: #6668c5;
@@ -120,23 +121,24 @@
     margin-top: 10px;
 }
 
-.icon-btn-add {
+.page-productos .container-productos .content-info .btn-add-product .icon-btn-add {
     width: 26px;
     height: 26px;
 }
 
-#product-form {
+/*formulario de add products*/
+.content-modal .content-modal-container .content-info .product-form {
     display: flex;
     gap: 15px;
  }
  
- .container-form-modal{
+ .content-modal .content-modal-container .content-info .product-form .container-form-modal{
     margin: 10px ;
     display: flex;
     flex-direction: column;
     gap: 15px;
  }
- .input-modal-product {
+ .content-modal .content-modal-container .content-info .product-form .container-form-modal .input-modal-product {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
@@ -146,18 +148,18 @@
     transition: border-color 0.3s;
  }
  
- .input-modal-product::placeholder {
+ .content-modal .content-modal-container .content-info .product-form .container-form-modal .input-modal-product  .input-modal-product::placeholder {
     color: #888;
     font-weight: bold;
  }
  
- .content-buttons-product {
+ .content-modal .content-modal-container .content-buttons-product {
     display: flex;
     justify-content: end;
     margin-top: 10px;
  }
  
- .btn-modal {
+ .content-modal .content-modal-container .content-buttons-product .btn-modal {
     margin: 10px 5px;
     text-align: center;
     font-size: 16px;
@@ -168,18 +170,18 @@
     transition: background-color 0.3s;
  }
  
- .button-cancel-product {
+ .content-modal .content-modal-container .content-buttons-product .button-cancel-product {
     background-color: #dc3545;
     color: white;
  }
- .button-cancel-product:hover {
+ .content-modal .content-modal-container .content-buttons-product  .button-cancel-product:hover {
     background-color: #c82333;
  }
  
- .button-confirm-product {
+ .content-modal .content-modal-container .content-buttons-product .button-confirm-product {
     background-color: #5555ad;
     color: white;
  }
- .button-confirm-product:hover {
+ .content-modal .content-modal-container .content-buttons-product  .button-confirm-product:hover {
     background-color: #5050c7;
  }
