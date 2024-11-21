@@ -10,6 +10,8 @@
       if(isset($_GET['id'])){
          $id = $_GET['id'];
          $response = $users->readById($id);
+      }else if($_SERVER['REQUEST_URI'] === '/users/count'){
+         $response = $users->countUsers();
       }else{
          $response = $users->readAll();
       }
@@ -34,5 +36,12 @@
       $response = $users->delete($id);
       echo json_encode($response);
    }
+
+   if ($method === 'GET' && $path === '/users/count') {
+      $usersModel = new usersModel();
+      $result = $usersModel->countUsers();
+      echo json_encode($result);
+      exit;
+  }
    
 ?>
