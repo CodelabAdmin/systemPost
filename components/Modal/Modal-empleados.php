@@ -16,13 +16,17 @@
         <div class="content-info-empleados">
             <div class="content-modal-form">
                 <div class="content-input-form">
-                <input placeholder="Nombre completo" class="input"type="text">
+                        <input placeholder="Nombre completo" type="text">
                 </div>
                 <div class="content-input-form2">
-                <input placeholder="Celular" class="input"type="number">
-                <input placeholder="Rol" class="input"type="text">
-                <input placeholder="E-mail" class="input"type="email">
-                <input placeholder="Contraseña" class="input"type="password">
+                    <div class="content-input">
+                        <input placeholder="Celular" type="number">
+                        <input placeholder="Rol"  type="text">
+                    </div>
+                    <div class="content-input">
+                        <input placeholder="E-mail"  type="email">
+                        <input placeholder="Contraseña"  type="password">
+                    </div>
                 </div>
             </div>
         </div>

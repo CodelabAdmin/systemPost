@@ -108,25 +108,3 @@
     font-size: 20px;
     margin-top: 20px;
 }
-
-.content-modal .content-modal-container .content-info-empleados .content-input-form .input{
-    width: 84%;
-    height: 30px;
-    outline: none;
-    border: 2px solid rgb(212, 212, 212);
-    border-radius: 5px;
-    font-size: 16px;
-    display: flex;
-    margin: 5px;
-
-}
-
-.content-modal .content-modal-container .content-info-empleados .content-input-form2 .input{
-    width: 40%;
-    height: 30px;
-    outline: none;
-    border: 2px solid rgb(212, 212, 212);
-    border-radius: 5px;
-    font-size: 16px;
-    margin: 5px;
-}
