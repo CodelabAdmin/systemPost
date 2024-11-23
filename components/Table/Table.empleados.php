@@ -23,19 +23,19 @@ if (!is_array($user)) {
 }
 
 
-$productosPorPagina = 5;
+$usuariosPorPagina = 5;
 $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$totalProductos = count($user);
-$totalPaginas = ceil($totalProductos / $productosPorPagina);
+$totalUsuarios = count($user);
+$totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
 
 // Asegurarse de que la página actual es válida
 $paginaActual = max(1, min($paginaActual, $totalPaginas));
 
 // Calcular el índice de inicio para la página actual
-$indiceInicio = ($paginaActual - 1) * $productosPorPagina;
+$indiceInicio = ($paginaActual - 1) * $usuariosPorPagina;
 
 // Obtener los productos para la página actual
-$productosEnPagina = array_slice($user, $indiceInicio, $productosPorPagina);
+$usuariosEnPagina = array_slice($user, $indiceInicio, $usuariosPorPagina);
 
 
 function getPaginationRange($paginaActual, $totalPaginas, $maxPaginas = 3)
@@ -76,7 +76,7 @@ function formatText($text)
             </tr>
          </thead>
          <tbody>
-            <?php foreach ($productosEnPagina as $user): ?>
+            <?php foreach ($usuariosEnPagina as $user): ?>
                <tr>
                   <td><?php echo $user['id_user']; ?></td>
                   <td><?php echo $user['fullname']; ?></td>
