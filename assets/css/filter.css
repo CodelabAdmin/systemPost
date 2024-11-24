@@ -1,26 +1,23 @@
-
 .filter {
     display: flex;
     align-items: center;
-    margin-left: 980px; 
-    margin-top: 200px;   
     position: relative;
 }
 
-.filter-input {
+.filter .filter-input {
     border: 1px solid #c3c3e5;
     border-radius: 8px;
     padding: 6px 10px;
     outline: none;
     font-size: 14px;
-    width: 220px; 
+    width: 220px;
 }
 
-.filter-input:focus {
+.filter .filter-input:focus {
     border-color: #3b32e4;
 }
 
-.filter-button {
+.filter .filter-button {
     background-color: #6668c5;
     border: none;
     border-radius: 8px;
@@ -32,12 +29,10 @@
     margin-left: 5px;
 }
 
-.filter-button svg {
+.filter .filter-button svg {
     fill: white;
 }
 
-.filter-button:hover {
+.filter .filter-button:hover {
     background-color: #5a54d4;
 }
-
-
