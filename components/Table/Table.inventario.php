@@ -2,16 +2,12 @@
 function getProducts()
 {
    try {
-      $url = "http://localhost/server/systemPost/api/products";
+      $url = "http://localhost/server/systemPost/api/inventories/products?status=activo";
       $response = file_get_contents($url);
       $data = json_decode($response, true);
 
-      if ($data && isset($data['products'])) {
-         // Filtrar productos con estado "activo"
-         $productosActivos = array_filter($data['products'], function($producto) {
-            return isset($producto['status']) && $producto['status'] === 'activo';
-         });
-         return $productosActivos;
+      if ($data && isset($data['data'])) {
+         return $data['data'];
       } else {
          return [];
       }
@@ -25,6 +21,8 @@ $productos = getProducts();
 if (!is_array($productos)) {
    $productos = [];
 }
+
+// echo "<script>console.log(" . json_encode($productos) . ");</script>";
 
 $productosPorPagina = 5;
 $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
@@ -62,8 +60,7 @@ function formatText($text)
    }
    return $text;
 };
-
-
+$activo = false;
 ?>
 
 <div class="container">
@@ -87,10 +84,10 @@ function formatText($text)
                   <td><?php echo $producto['id_product']; ?></td>
                   <td><?php echo $producto['name']; ?></td>
                   <td><?php echo  formatText($producto['description']) ?></td>
-                  <td><?php echo number_format($producto['product_price'], 2, ',', '.'); ?></td>
+                  <td><?php echo $producto['product_price']; ?></td>
                   <td class="text-center"><?php echo $producto['stock']; ?></td>
                   <td class="text-center"><?php echo $producto['category']; ?></td>
-                  <td class="text-center"><?php echo date('d/m/Y', strtotime($producto['create_at'])); ?></td>
+                  <td class="text-center"><?php echo $producto['create_at']; ?></td>
                   <td class="text-center acciones">
                      <div class="content-actions">
                         <button class="btn-accions view">
