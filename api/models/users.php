@@ -344,4 +344,11 @@ class usersModel
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+    public function countUsers() {
+        $query = "SELECT COUNT(*) FROM users";
+        $result = $this->conn->query($query);
+        return $result->fetch_assoc();
+    }
+
 }
