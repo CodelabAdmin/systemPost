@@ -4,6 +4,7 @@
 @import url('./empleados.css');
 @import url('./modal.css');
 @import url('./proveedores.css');
+
 /* estilos de aside del login */
 
 .container-aside-login {
@@ -503,7 +504,7 @@
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     white-space: nowrap;
-    z-index: 10; 
+    z-index: 11; 
 }
 
 .component-menu .menu-options .option:hover::after {
