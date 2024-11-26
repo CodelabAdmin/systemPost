@@ -4,6 +4,7 @@
 @import url('./empleados.css');
 @import url('./modal.css');
 @import url('./proveedores.css');
+@import url('./filter.css');
 /* estilos de aside del login */
 
 .container-aside-login {
