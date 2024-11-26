@@ -1,4 +1,19 @@
-<?php ?>
+<?php 
+function countUsers()
+{
+    try {
+        $url = "http://localhost/server/systemPost/api/users/count";
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        return ['count' => $data['COUNT(*)']];
+    } catch (Exception $e) {
+        return ['count' => 0];
+    }
+}
+$countUsers = countUsers();
+?>
+
 <div class="page-empleados">
     <div class="container-header-empleados">
         <div class="content-info-empleados">
@@ -10,6 +25,7 @@
             permitiendo registrar, autenticar y administrar sus datos de manera segura. Facilita la creación, modificación, 
             eliminación y consulta de usuarios, y controla el acceso según roles asignados.
             </div>
+            <div class="buttom" onClick="toggleModal()">+ Crear</div>
         </div>
         <div class="content-counter-empleados">
             <div class="content-info-counter-empleados">
@@ -20,7 +36,7 @@
                         </svg>
                     </div>
                     <div class="number-counter-empleados">
-                        20
+                        <?php echo $countUsers['count'] ?>
                     </div>
                 </div>
                 <div class="title-counter-empleados">
@@ -35,4 +51,5 @@
             <?php require('./components/Table/Table.empleados.php') ?>   
         </div>
     </div>
+    <?php require('components/Modal/Modal-empleados.php') ?>
 </div>
