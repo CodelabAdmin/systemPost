@@ -164,11 +164,17 @@
     height: 24px;
 }
 
+.content-modal .content-modal-container .content-info{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
 
-
-
-
-
-
-
-
+.content-modal .content-modal-container .content-buttons {
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
