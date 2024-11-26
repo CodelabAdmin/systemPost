@@ -15,6 +15,11 @@ class inventoriesModel {
         }
     }
 
+    public function countProducts() {
+        $query = "SELECT COUNT(*) AS total FROM products WHERE status = 'activo';";
+        $result = $this->conn->query($query);
+        return $result->fetch_assoc();
+    }
     
     public function readSuppliersActive($status){
         $query = "SELECT * FROM suppliers WHERE status = 'activo';";

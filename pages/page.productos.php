@@ -1,3 +1,18 @@
+<?php
+function countProducts()
+{
+    try {
+        $url = "http://localhost/server/systemPost/api/products/count";
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        return ['count' => $data["COUNT(*)"]];
+    } catch (Exception $e) {
+        return ['count' => 0];
+    }
+}
+$countProducts = countProducts();
+?>
 
 <div class="page-productos">
     <div class="container-header">
@@ -6,7 +21,7 @@
                 Productos
             </div>
             <div class="content-descripcion">
-            El módulo de productos gestiona la información de los productos del sistema, permitiendo registrar, actualizar, eliminar y consultar sus datos de forma eficiente. Facilita la organización del inventario y garantiza que los usuarios puedan acceder a detalles clave de cada producto, como nombre, stock, precio y categoría.
+                El módulo de productos gestiona la información de los productos del sistema, permitiendo registrar, actualizar, eliminar y consultar sus datos de forma eficiente. Facilita la organización del inventario y garantiza que los usuarios puedan acceder a detalles clave de cada producto, como nombre, stock, precio y categoría.
             </div>
             <div class="btn-add-product" onclick="toggleModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-btn-add">
@@ -24,7 +39,7 @@
                         </svg>
                     </div>
                     <div class="number-counter">
-                        <span id="countProducts"></span>
+                        <?php echo $countProducts['count']; ?>
                     </div>
                 </div>
                 <div class="title-counter">
@@ -35,10 +50,9 @@
     </div>
     <div class="container-productos">
         <div class="container-Table-productos">
-            <?php require ('./components/Table/Table.productos.php'); ?>
+            <?php require('./components/Table/Table.productos.php'); ?>
         </div>
     </div>
-    <?php require ('./components/Modal/Modal-products.php'); ?>
+    <?php require ('./components/Modal/Modal.productos.php'); ?>
 
 </div>
-   

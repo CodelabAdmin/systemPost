@@ -105,7 +105,7 @@
     height: 550px;
 }
 
-.btn-add-product {
+.page-productos .container-header .content-info .btn-add-product {
     width: 120px;
     height: 40px;
     background-color: #6668c5;
@@ -120,66 +120,82 @@
     margin-top: 10px;
 }
 
-.icon-btn-add {
+.page-productos .container-header .content-info .btn-add-product .icon-btn-add {
     width: 26px;
     height: 26px;
 }
 
-#product-form {
-    display: flex;
-    gap: 15px;
- }
- 
- .container-form-modal{
-    margin: 10px ;
+.content-modal .content-modal-container .content-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
- }
- .input-modal-product {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.content-modal .content-modal-container .content-form .container-product {
+    display: flex;
+}
+
+.content-modal .content-modal-container .content-form .container-product .column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.content-modal .content-modal-container .content-form .container-product .column .input-product {
+    width: 90%;
+    height: 30px;
+    padding: 20px 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
-    color: #333;
-    transition: border-color 0.3s;
- }
- 
- .input-modal-product::placeholder {
-    color: #888;
+}
+
+.content-modal .content-modal-container .content-form .container-product .column .input-product::placeholder {
     font-weight: bold;
- }
- 
- .content-buttons-product {
+
+}
+.content-modal .content-modal-container .content-form .container-product .column .date{
+    height: 30px;
+    font-size: 16px;
+    font-family: sans-serif;    
+}
+
+.content-modal .content-modal-container .content-form .container-product .column .textarea {
+    resize: none;
+    height: 160px;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+.content-modal .content-modal-container .content-buttons-product{
     display: flex;
     justify-content: end;
-    margin-top: 10px;
- }
+    padding-right: 20px;
+}
  
- .btn-modal {
+ .content-modal .content-modal-container .content-buttons-product .btn-modal {
     margin: 10px 5px;
     text-align: center;
     font-size: 16px;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
-    padding: 10px 25px ;
-    transition: background-color 0.3s;
+    padding: 10px 25px;
+    display: flex;
  }
  
- .button-cancel-product {
+ .content-modal .content-modal-container .content-buttons-product .button-cancel-product {
     background-color: #dc3545;
     color: white;
  }
- .button-cancel-product:hover {
+ .content-modal .content-modal-container .content-buttons-product  .button-cancel-product:hover {
     background-color: #c82333;
  }
  
- .button-confirm-product {
+ .content-modal .content-modal-container .content-buttons-product .button-confirm-product {
     background-color: #5555ad;
     color: white;
  }
- .button-confirm-product:hover {
+ .content-modal .content-modal-container .content-buttons-product .button-confirm-product:hover {
     background-color: #5050c7;
  }
