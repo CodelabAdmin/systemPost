@@ -1,4 +1,19 @@
-<?php ?>
+<?php 
+function countSuppliers()
+{
+    try {
+        $url = "http://localhost/server/systemPost/api/suppliers/count";
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        return ['count' => $data["COUNT(*)"]];
+    } catch (Exception $e) {
+        return ['count' => 0];
+    }
+}
+$countSuppliers = countSuppliers();
+?>
+
 <div class="page-proveedores">
     <div class="container-header-proveedores">
         <div class="content-info-proveedores">
@@ -21,7 +36,9 @@
                             <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <div class="number-counter-proveedores"><span id="countSuppliers"></span></div>
+                    <div class="number-counter-proveedores">
+                        <?php echo $countSuppliers['count']; ?>
+                    </div>
                 </div>
                 <div class="title-counter-proveedores">
                     Proveedores Totales
