@@ -1,21 +1,54 @@
 <?php
 function getProducts()
 {
-   try {
-      $url = "http://localhost/server/systemPost/api/products";
-      $response = file_get_contents($url);
-      $data = json_decode($response, true);
-
-      if ($data && isset($data['products'])) {
-         return $data['products'];
-      } else {
-         return [];
-      }
-   } catch (Exception $e) {
-      throw new Exception("Error al cargar los productos: " . $e->getMessage());
-      return [];
-   }
+    try {
+        // Obtener la URL base dinámicamente
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+        $host = $_SERVER['HTTP_HOST'];
+        $baseUrl = $protocol . $host;
+        
+        // Construir la URL de la API
+        $url = $baseUrl . "/api/products";
+        
+        // Configurar el contexto de la petición
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'GET',
+                'header' => 'Content-Type: application/json',
+                'ignore_errors' => true,
+                'timeout' => 30
+            ]
+        ]);
+        
+        // Realizar la petición
+        $response = file_get_contents($url, false, $context);
+        
+        if ($response === FALSE) {
+            error_log("Error al obtener productos: No se pudo conectar con la API");
+            return [];
+        }
+        
+        // Decodificar la respuesta
+        $data = json_decode($response, true);
+        
+        // Verificar si la respuesta es válida
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            error_log("Error al decodificar JSON: " . json_last_error_msg());
+            return [];
+        }
+        
+        // Verificar si hay productos en la respuesta
+        if ($data && isset($data['products'])) {
+            return $data['products'];
+        }
+        
+        return [];
+    } catch (Exception $e) {
+        error_log("Error en getProducts: " . $e->getMessage());
+        return [];
+    }
 }
+
 
 $productos = getProducts();
 if (!is_array($productos)) {
