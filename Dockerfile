@@ -3,8 +3,12 @@ FROM php:8.1-apache
 # Instalar extensiones PHP necesarias
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 
-# Habilitar mod_rewrite
+# Habilitar módulos de Apache
 RUN a2enmod rewrite
+RUN a2enmod headers
+
+# Configurar ServerName para evitar warnings
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # Copiar archivos del proyecto
 COPY . /var/www/html/
@@ -12,6 +16,8 @@ COPY . /var/www/html/
 # Establecer permisos
 RUN chown -R www-data:www-data /var/www/html
 
-# Limpiar el cache de apache
-RUN a2enmod headers
-RUN service apache2 restart
+# Exponer puerto
+EXPOSE 80
+
+# Usar el comando CMD en lugar de service apache2 restart
+CMD ["apache2-foreground"]
