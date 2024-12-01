@@ -171,6 +171,15 @@
     cursor: pointer;
 }
 
+.login-container .login-form .input-group .password-container .icon-password-show {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 10px;
+    bottom: 26px;
+    cursor: pointer;
+}
+
 .login-container .login-form .remember-me {
     display: flex;
     align-items: center;
