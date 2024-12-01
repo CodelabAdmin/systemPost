@@ -16,16 +16,39 @@
     font-weight: 600;
 }
 
+.content-modal .concontent-modal-container .content-form  .content-info {
+    border-radius: 20px;
+    border: 3px solid #151515;
+}
+
 .content-sales .content-info{
     display: flex;
     flex-direction: row;
     width: 100%;
     gap: 20px;
+    padding: 5px;
+}
+
+
+.content-sales .content-info .modal-venta{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-sales .content-info .modal-venta .content-title .title-modal {
+    margin: 0 0 5px 0;
+    font-size: 28px; /* Tamaño más grande */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .content-sales .content-info .content-1{
     width: 65%;
-
 }
 
 .content-sales .content-info .content-1 .container .table-sales{
@@ -156,7 +179,7 @@
 
 .content-sales .content-info .content-2 .product-info .action-buttons .quantity{
     font-size: 0.875rem;
-    color: #374151;
+    color: #214a8b;
 }
 
 .content-sales .content-info .content-2 .product-info .action-buttons .icon {
@@ -164,11 +187,45 @@
     height: 24px;
 }
 
+.content-modal .content-modal-container .content-info{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
 
+.content-modal .content-modal-container .content-form .content-buttons {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+.content-modal .content-modal-container .content-buttons .btn-modal-button-cancel .btn-modal-button-confirm{
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
 
+.content-modal .content-modal-container .content-buttons .btn-confirmar-venta{
+    background-color: #6a5acd;
+    color: white; 
+    padding: 10px 10px; 
+    border: 1px solid #542e89; 
+    border-radius: 7px; 
+    cursor: pointer; 
+    font-size: 14px;
+}
 
-
-
-
+.content-modal .content-modal-container .content-buttons .btn-cancelar-venta{
+    background-color: #f6e6e6; 
+    color: #5555AD; 
+    padding: 8px 8px; 
+    border: 1px solid #6060b8; 
+    border-radius: 7px; 
+    cursor: pointer; 
+    font-size: 14px;
+}
 

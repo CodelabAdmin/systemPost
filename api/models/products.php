@@ -450,5 +450,11 @@ class productsModel
         }
     }
 
+    public function countProducts(){
+        $query = "SELECT COUNT(*) FROM products";
+        $result = $this->conn->query($query);
+        return $result->fetch_assoc();
+    }
+
     
 }

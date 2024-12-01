@@ -13,6 +13,8 @@ if ($request == 'GET') {
     } else if (isset($_GET['status'])){
         $status = $_GET['status'];
         $response = $products->getFiltredProducts($status);
+    }else if($_SERVER['REQUEST_URI'] === '/products/count'){
+        $response = $products->countProducts();
     }else {
         $response = $product->readAll();
     }
