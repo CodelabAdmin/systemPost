@@ -428,7 +428,14 @@ function formatText($text)
                     itemExistente.cantidad++;
                     itemExistente.subtotal = itemExistente.cantidad * itemExistente.product_price;
                 } else {
-                    alert('No hay más stock disponible para este producto');
+                    Swal.fire({
+                        title: 'Alerta',
+                        text: 'No hay más stock disponible para este producto',
+                        icon: 'warning',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                    });
                     return;
                 }
             } else {
@@ -482,14 +489,31 @@ function formatText($text)
                 console.log('Nueva cantidad:', nuevaCantidad); // Debug
 
                 if (nuevaCantidad <= 0) {
-                    if (confirm('¿Desea eliminar este producto del carrito?')) {
-                        carritoVenta = carritoVenta.filter(item =>
-                            item.id_product !== parseInt(idProducto) &&
-                            item.id_product !== idProducto
-                        );
-                    }
+                    Swal.fire({
+                        title: 'Alerta',
+                        text: '¿Desea eliminar este producto del carrito?',
+                        icon: 'warning',
+                        showConfirmButton: true,
+                        showCancelButton: true,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            carritoVenta = carritoVenta.filter(item =>
+                                item.id_product !== parseInt(idProducto) &&
+                                item.id_product !== idProducto
+                            );
+                            actualizarTablaDetalle();
+                            calcularTotales();
+                        }
+                    });
                 } else if (nuevaCantidad > item.stock) {
-                    alert('No hay más stock disponible para este producto');
+                    Swal.fire({
+                        title: 'Alerta',
+                        text: 'No hay más stock disponible para este producto',
+                        icon: 'warning',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        showCancelButton: false,
+                    });
                     return;
                 } else {
                     item.cantidad = nuevaCantidad;
@@ -545,7 +569,14 @@ function formatText($text)
 
         function confirmarVenta() {
             if (carritoVenta.length === 0) {
-                alert('Agregue productos a la venta');
+                Swal.fire({
+                    title: 'Alerta',
+                    text: 'Agregue productos a la venta',
+                    icon: 'warning',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                });
                 return;
             }
 
@@ -625,11 +656,18 @@ function formatText($text)
                         timer: 1000,
                         showConfirmButton: false,
                         showCancelButton: false,
-                    }); 
+                    });
                 }
             } catch (error) {
                 console.error('Error completo:', error);
-                alert('Error al procesar la venta: ' + error.message);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Error al procesar la venta: ' + error.message,
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    showCancelButton: false,
+                });
             } finally {
                 hideLoading();
             }
