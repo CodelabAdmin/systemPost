@@ -409,7 +409,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: gray;
+    background-color: rgb(255, 255, 255);
+    color: #252641;
 }
 
 
@@ -460,6 +461,7 @@
     align-items: center;
     margin-bottom: 1px; 
     padding-right: 5px;
+    cursor: pointer;
 }
 .component-menu .menu-logo img {
     width: 50px;

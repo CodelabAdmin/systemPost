@@ -1,6 +1,8 @@
 <div class="component-menu">
     <div class="menu-logo">
-        <img src="assets/images/LOGO.svg" alt="Logo-Codelab">
+        <a href="index">
+            <img src="assets/images/LOGO.svg" alt="Logo-Codelab">
+        </a>
     </div>
     <div class="menu-options">
         <a href="ventas"  class="option" data-tooltip="Ventas">
