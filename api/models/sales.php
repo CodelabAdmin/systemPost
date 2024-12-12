@@ -64,9 +64,9 @@ class SalesModel
             $total += $product_price * $quantity;
         }
 
-        if (empty($id_user) || empty($id_product) || empty($quantity)) {
+        if (empty($id_user)) {
             http_response_code(400);
-            return ["status" => "error", "message" => "Campo es requerido."];
+            return ["status" => "error", "message" => "El ID de usuario es requerido."];
         }
 
         // Iniciar transacción
@@ -77,9 +77,9 @@ class SalesModel
             $query = "INSERT INTO sales (id_user, total) VALUES (?, ?);";
             $stmt = $this->conn->prepare($query);
             if (!$stmt) {
-                throw new Exception("Error al preparar la consulta: " . $this->conn->error);
+                throw new Exception("Error al preparar la consulta venta: " . $this->conn->error);
             }
-            $stmt->bind_param("ii", $id_user, $total);
+            $stmt->bind_param("id", $id_user, $total);
             $stmt->execute();
             if ($stmt->affected_rows === 0) {
                 throw new Exception("Error al crear la venta: " . $stmt->error);
@@ -90,14 +90,13 @@ class SalesModel
             foreach ($sales as $sale) {
                 $id_product = $sale["id_product"];
                 $quantity = $sale["quantity"];
-                $product_price = $products[$id_product]["product_price"];
 
-                $query = "INSERT INTO sale_details (id_sale, id_product, quantity, product_price) VALUES (?, ?, ?, ?);";
+                $query = "INSERT INTO sale_details (id_sale, id_product, quantity) VALUES (?, ?, ?);";
                 $stmt = $this->conn->prepare($query);
                 if (!$stmt) {
-                    throw new Exception("Error al preparar la consulta: " . $this->conn->error);
+                    throw new Exception("Error al preparar la consulta venta detalle: " . $this->conn->error);
                 }
-                $stmt->bind_param("iiii", $id_sale, $id_product, $quantity, $product_price);
+                $stmt->bind_param("iii", $id_sale, $id_product, $quantity);
                 $stmt->execute();
                 if ($stmt->affected_rows === 0) {
                     throw new Exception("Error al crear el detalle de la venta: " . $stmt->error);
@@ -110,7 +109,7 @@ class SalesModel
             }
 
             // Obtener la venta y sus detalles
-            $sale = $this->inventoriesModel->readSaleById($id_sale);
+            $sale = $this->readSaleById($id_sale);
             $details = $this->readSalesDetailsById($id_sale);
 
             if ($sale["status"] !== "ok" || $details["status"] !== "ok") {
@@ -137,33 +136,72 @@ class SalesModel
         }
     }
 
-    public function readSalesDetailsById($id)
+    public function readSaleById($id_sale)
     {
-        $query = "SELECT * FROM sale_details WHERE id_sale = ?";
+        $query = "SELECT s.*, u.fullname 
+                  FROM sales s 
+                  INNER JOIN users u ON s.id_user = u.id_user 
+                  WHERE s.id_sale = ?";
+                  
         $stmt = $this->conn->prepare($query);
         if (!$stmt) {
             http_response_code(500);
             return [
                 "status" => "error",
-                "message" => "Error al preparar la consulta: " . $this->conn->error,
+                "message" => "Error al preparar la consulta: " . $this->conn->error
             ];
         }
-        $stmt->bind_param("i", $id);
+
+        $stmt->bind_param("i", $id_sale);
         $stmt->execute();
         $result = $stmt->get_result();
+
         if ($result->num_rows === 0) {
             http_response_code(404);
             return [
                 "status" => "error",
-                "message" => "No se encontró ningún detalle de venta con el ID proporcionado.",
-            ];
-        } else {
-            http_response_code(200);
-            return [
-                "status" => "ok",
-                "data" => $result->fetch_all(MYSQLI_ASSOC),
+                "message" => "No se encontró la venta con el ID proporcionado."
             ];
         }
+
+        return [
+            "status" => "ok",
+            "data" => $result->fetch_assoc()
+        ];
+    }
+
+    public function readSalesDetailsById($id)
+    {
+        $query = "SELECT sd.*, p.name, p.product_price 
+                  FROM sale_details sd
+                  INNER JOIN products p ON sd.id_product = p.id_product 
+                  WHERE sd.id_sale = ?";
+                  
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            http_response_code(500);
+            return [
+                "status" => "error",
+                "message" => "Error al preparar la consulta: " . $this->conn->error
+            ];
+        }
+        
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows === 0) {
+            http_response_code(404);
+            return [
+                "status" => "error",
+                "message" => "No se encontró ningún detalle de venta con el ID proporcionado."
+            ];
+        }
+        
+        return [
+            "status" => "ok",
+            "data" => $result->fetch_all(MYSQLI_ASSOC)
+        ];
     }
 
     public function validateStock($id_product, $quantity)
