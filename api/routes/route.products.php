@@ -42,13 +42,6 @@ $AppRoutes->AddRoutes('GET', 'products', function () {
     echo json_encode($response);
 });
 
-$AppRoutes->AddRoutes('GET', 'products/count', function () {
-    require_once 'models/products.php';
-    $products = new productsModel();
-    $response = $products->countProducts();
-    echo json_encode($response);
-});
-
 $AppRoutes->AddRoutes('POST', 'products', function () {
     require_once 'models/products.php';
     $products = new productsModel();
