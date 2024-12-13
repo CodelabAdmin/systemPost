@@ -14,7 +14,66 @@ function countProducts()
 $countProducts = countProducts();
 ?>
 
+<style>
+    .skeleton {
+        animation: skeleton-loading 1s linear infinite alternate;
+    }
+
+    @keyframes skeleton-loading {
+        0% {
+            background-color: #e5e7eb;
+        }
+
+        100% {
+            background-color: #f3f4f6;
+        }
+    }
+
+    .skeleton-row {
+        display: flex;
+        padding: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .skeleton-cell {
+        height: 20px;
+        border-radius: 4px;
+        margin-right: 1rem;
+    }
+
+    .skeleton-cell-small {
+        width: 80px;
+    }
+
+    .skeleton-cell-medium {
+        width: 150px;
+    }
+
+    .skeleton-cell-large {
+        width: 200px;
+    }
+
+    .skeleton-container {
+        width: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .skeleton-table {
+        display: none;
+        width: 1200px;
+        height: 550px;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+</style>
+
 <div class="page-productos">
+
+
+    <!-- Contenido principal -->
     <div class="container-header">
         <div class="content-info">
             <div class="content-title">
@@ -48,11 +107,46 @@ $countProducts = countProducts();
             </div>
         </div>
     </div>
+
+    <!-- Skeleton loader -->
+    <div id="skeleton" class="skeleton-container">
+        <div id="skeleton-loader" class="skeleton-table">
+            <?php for ($i = 0; $i < 5; $i++): ?>
+                <div class="skeleton-row">
+                    <div class="skeleton-cell skeleton-cell-small skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-large skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-medium skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-small skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-medium skeleton"></div>
+                </div>
+            <?php endfor; ?>
+        </div>
+    </div>
     <div class="container-productos">
         <div class="container-Table-productos">
+
             <?php require('./components/Table/Table.productos.php'); ?>
         </div>
     </div>
-    <?php require ('./components/Modal/Modal.productos.php'); ?>
+    <?php require('./components/Modal/Modal.productos.php'); ?>
 
 </div>
+<!-- 
+<script>
+    function showSkeleton() {
+        document.getElementById('skeleton').style.display = 'block';
+        document.getElementById('skeleton-loader').style.display = 'block';
+        document.querySelector('.container-Table-productos').style.display = 'none';
+    }
+
+    function hideSkeleton() {
+        document.getElementById('skeleton').style.display = 'none';
+        document.getElementById('skeleton-loader').style.display = 'none';
+        document.querySelector('.container-Table-productos').style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showSkeleton();
+        setTimeout(hideSkeleton, 1000);
+    });
+</script> -->

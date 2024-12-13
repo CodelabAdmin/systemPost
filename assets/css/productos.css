@@ -150,15 +150,15 @@
     font-size: 16px;
 }
 
-.content-modal .content-modal-container .content-form .container-product .column .input-product::placeholder {
-    font-weight: bold;
-
-}
-.content-modal .content-modal-container .content-form .container-product .column .date{
-    height: 30px;
+.content-modal .content-modal-container .content-form .container-product .column select {
+    width: 90%;
+    height: 40px;
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 16px;
-    font-family: sans-serif;    
 }
+
 .content-modal .content-modal-container .content-form .container-product .column .textarea {
     resize: none;
     height: 160px;
