@@ -275,6 +275,7 @@ function formatText($text)
     </div>
 
     <div class="header-sales">Realizar una venta</div>
+    
     <div class="content-info">
         <div class="content-1">
             <div class="container">
@@ -415,7 +416,13 @@ function formatText($text)
     </div>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script>
+        let user_login = <?php echo json_encode($_SESSION['data_user']); ?>;
+        let user_rol = user_login.rol;
+        let user_name = user_login.nombre;
+
         let carritoVenta = [];
         const IVA = 0.16;
 
@@ -603,10 +610,154 @@ function formatText($text)
             modal.style.display = 'flex';
         }
 
+        function generarTicket() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF({
+                unit: 'mm',
+                format: [80, 220] 
+            });
+
+            let y = 5; // Empezamos más arriba
+
+            // Función helper para centrar texto
+            const centrarTexto = (texto, y) => {
+                pdf.text(texto, 40, y, { align: 'center' });
+            };
+
+            // Función helper para línea divisoria
+            const lineaDivisoria = (y) => {
+                centrarTexto('========================================', y);
+                return y + 4;
+            };
+
+            // Encabezado Principal
+            pdf.setFontSize(13);
+            centrarTexto('SystemPost', y);
+            y += 6;
+            
+            // Información de la empresa
+            pdf.setFontSize(8);
+            centrarTexto('CODELAB S.A.S', y); y += 4;
+            centrarTexto('NIT: 0101010101', y); y += 4;
+            centrarTexto('Medellin, Colombia', y); y += 4;
+            centrarTexto('Tel: (+57) 123-456789', y); y += 4;
+            centrarTexto('www.codelab.com', y); y += 4;
+
+            // Agregar después de la información de la empresa
+            centrarTexto('Régimen: Responsable de IVA', y); y += 4;
+            centrarTexto('Facturación Electrónica Res. DIAN 000012', y); y += 4;
+            centrarTexto('Autorización: 18764000000001-99999999', y); y += 4;
+            centrarTexto('Vigencia: 24/01/2024 - 24/01/2025', y); y += 4;
+
+            // Tipo de Comprobante
+            y = lineaDivisoria(y);
+            pdf.setFontSize(10);
+            centrarTexto('TICKET DE VENTA', y); y += 4;
+            pdf.setFontSize(9);
+            centrarTexto('ORIGINAL', y); y += 4;
+
+            // Información de la venta
+            y = lineaDivisoria(y);
+            pdf.setFontSize(8);
+            
+            const fechaActual = new Date();
+            const numeroTicket = 'T-' + Math.floor(Math.random() * 100000).toString().padStart(5, '0');
+            
+            pdf.text(`TICKET: ${numeroTicket}`, 5, y); y += 4;
+            pdf.text(`FECHA: ${fechaActual.toLocaleDateString('es-ES')}`, 5, y); y += 4;
+            pdf.text(`HORA: ${fechaActual.toLocaleTimeString('es-ES')}`, 5, y); y += 4;
+            pdf.text(`CAJERO: ${user_name}`, 5, y); y += 4;
+            pdf.text(`ROL: ${user_rol}`, 5, y); y += 4;
+            pdf.text('CLIENTE: 2222', 5, y); y += 4;
+            pdf.text(`FORMA DE PAGO: CONTADO`, 5, y); y += 4;
+            pdf.text(`MEDIO DE PAGO: EFECTIVO`, 5, y); y += 4;
+            pdf.text(`ORDEN DE COMPRA: N/A`, 5, y); y += 4;
+
+
+
+            // Encabezado de productos
+            y = lineaDivisoria(y);
+            pdf.text('CANT  DESCRIPCION          P.UNIT    IMPORTE', 5, y);
+            y = lineaDivisoria(y+4);
+
+            // Detalles de productos
+            carritoVenta.forEach(item => {
+                const subtotal = item.cantidad * item.product_price;
+                
+                // Formatear campos
+                const cantidad = item.cantidad.toString().padStart(2, ' ');
+                const nombre = item.name.padEnd(20, ' ').substring(0, 20);
+                const precio = item.product_price.toFixed(2).padStart(7, ' ');
+                const total = subtotal.toFixed(2).padStart(9, ' ');
+                
+                // Primera línea: cantidad y descripción
+                pdf.text(`${cantidad} ${nombre}`, 5, y);
+                y += 4;
+                // Segunda línea: precio unitario y total
+                pdf.text(`${' '.repeat(4)}${precio} X ${cantidad} = ${total}`, 5, y);
+                y += 5;
+            });
+
+            // Totales
+            y = lineaDivisoria(y);
+            const subtotal = carritoVenta.reduce((sum, item) => sum + (item.cantidad * item.product_price), 0);
+            const iva = subtotal * IVA;
+            const total = subtotal + iva;
+
+            pdf.text(`SUBTOTAL:${' '.repeat(24)}$${subtotal.toFixed(2)}`, 5, y); y += 4;
+            pdf.text(`I.V.A 16%:${' '.repeat(22)}$${iva.toFixed(2)}`, 5, y); y += 4;
+            pdf.setFontSize(10);
+            pdf.text(`TOTAL:${' '.repeat(24)}$${total.toFixed(2)}`, 5, y); y += 6;
+
+            // Información de pago
+            pdf.setFontSize(8);
+            y = lineaDivisoria(y);
+            const efectivoRecibido = document.getElementById('efectivo-recibido').value;
+            const cambio = efectivoRecibido - total;
+
+            pdf.text('DESGLOSE DE PAGO:', 5, y); y += 4;
+            pdf.text(`EFECTIVO:${' '.repeat(25)}$${parseFloat(efectivoRecibido).toFixed(2)}`, 5, y); y += 4;
+            pdf.text(`CAMBIO:${' '.repeat(27)}$${cambio.toFixed(2)}`, 5, y); y += 4;
+
+            // Letras
+            y = lineaDivisoria(y);
+           
+            // Información fiscal y políticas
+            pdf.setFontSize(7);
+            centrarTexto('ESTE DOCUMENTO ES UN COMPROBANTE FISCAL', y); y += 3;
+            centrarTexto('EFECTOS FISCALES AL PAGO', y); y += 6;
+
+            // Políticas
+            pdf.setFontSize(6);
+            centrarTexto('POLÍTICAS DE DEVOLUCIÓN:', y); y += 3;
+            centrarTexto('- 7 DÍAS CON TICKET Y PRODUCTO EN BUEN ESTADO', y); y += 3;
+            centrarTexto('- NO APLICA EN PRODUCTOS PERECEDEROS', y); y += 3;
+            centrarTexto('- CAMBIOS ÚNICAMENTE POR EL MISMO ARTÍCULO', y); y += 6;
+
+            // Mensaje de agradecimiento
+            pdf.setFontSize(9);
+            centrarTexto('¡GRACIAS POR SU PREFERENCIA!', y); y += 4;
+            pdf.setFontSize(7);
+            centrarTexto('Lo esperamos pronto', y); y += 6;
+
+            // Agregar después de los totales
+            y = lineaDivisoria(y);
+            
+
+            // Información adicional fiscal
+            pdf.setFontSize(7);
+            centrarTexto('FACTURA ELECTRÓNICA DE VENTA', y); y += 3;
+            centrarTexto(`No. FEVE-${numeroTicket}`, y); y += 3;
+            centrarTexto('Fecha validación DIAN:', y); y += 3;
+            centrarTexto(`${fechaActual.toLocaleString('es-ES')}`, y); y += 6;
+
+            // Abrir el ticket en una nueva ventana
+            window.open(pdf.output('bloburl'), '_blank');
+        }
+
         async function procesarVenta() {
             try {
                 showLoading();
-                // Ocultar modal de confirmación directamente
                 const modalVentas = document.querySelector('.content-modal-ventas');
                 if (modalVentas) {
                     modalVentas.style.display = 'none';
@@ -632,10 +783,12 @@ function formatText($text)
                 const data = await response.json();
 
                 if (data.status === 'ok') {
+                    // Generar e imprimir el ticket
+                    generarTicket();
+                    
                     carritoVenta = [];
                     actualizarTablaDetalle();
                     calcularTotales();
-
 
                     Swal.fire({
                         title: 'Venta Exitosa',
@@ -647,7 +800,6 @@ function formatText($text)
                     }).then(() => {
                         window.location.href = 'http://localhost/server/systemPost/ventas';
                     });
-
                 } else {
                     Swal.fire({
                         title: 'Error',
@@ -693,5 +845,6 @@ function formatText($text)
             showLoading();
             setTimeout(hideLoading, 500);
         });
+
     </script>
 </div>
