@@ -37,6 +37,8 @@ error_reporting(E_ALL);
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/apiManager.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script src="assets/js/app.js"></script>
     <?php
     if (!isset($_SESSION['user'])) {

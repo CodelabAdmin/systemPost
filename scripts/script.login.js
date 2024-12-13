@@ -40,7 +40,16 @@ async function obtener_datos(email, pass){
         let data = await res.json()
         if(data.status === "success"){
             $.ajax({
-                url:"api/session/sessionOn.php"
+                url:"api/session/sessionOn.php",
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    usuario_logueado: {
+                        id: data.user.id,
+                        nombre: data.user.fullname,
+                        rol: data.user.rol,
+                    }
+                })
             }).done(function(rst){
                 window.location.reload()
             })
