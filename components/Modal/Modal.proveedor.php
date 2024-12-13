@@ -39,7 +39,6 @@
                 </div>
 
                 <script>
-
                     async function addsuppliers() {
                         try {
                             //validacion
@@ -60,6 +59,40 @@
                                 return;
                             }
 
+                            // Crear el payload estructurado
+                            const supplierData = {
+                                fullname: fullname.trim(),
+                                phone: phone.replace(/\s/g, ''), // Eliminar espacios en blanco
+                                address: address.trim(),
+                                description: description.trim(),
+                                category: category.trim()
+                            };
+
+                            // Validar la estructura del payload
+                            console.log('Payload a enviar:', supplierData);
+
+                            // Validaciones específicas
+                            if (supplierData.phone.length < 8 || supplierData.phone.length > 10) {
+                                await Swal.fire({
+                                    title: 'Error',
+                                    text: 'El número de teléfono debe tener entre 8 y 10 dígitos',
+                                    icon: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                                return;
+                            }
+
+                            // Validar que todos los campos tengan el formato correcto
+                            if (!supplierData.fullname || supplierData.fullname.length < 3) {
+                                await Swal.fire({
+                                    title: 'Error',
+                                    text: 'El nombre del proveedor debe tener al menos 3 caracteres',
+                                    icon: 'error',
+                                    confirmButtonText: 'Aceptar'
+                                });
+                                return;
+                            }
+
                             // Mostrar loading
                             Swal.fire({
                                 title: 'Procesando',
@@ -71,19 +104,13 @@
                             });
 
                             try {
-                                const response = await fetch('https://localhost/server/systemPost/api/suppliers', {
+                                const response = await fetch('http://localhost/server/systemPost/api/suppliers', {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json',
                                         'Accept': 'application/json'
                                     },
-                                    body: JSON.stringify({
-                                        fullname,
-                                        phone,
-                                        address,
-                                        description,
-                                        category
-                                    })
+                                    body: JSON.stringify(supplierData)
                                 });
                                 
                                 // Verificar si la respuesta es exitosa
