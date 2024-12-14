@@ -5,6 +5,7 @@
 @import url('./modal.css');
 @import url('./proveedores.css');
 @import url('./filter.css');
+@import url('./reportes.css');
 /* estilos de aside del login */
 
 .container-aside-login {
@@ -163,6 +164,15 @@
 
 
 .login-container .login-form .input-group .password-container .icon-password {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 10px;
+    bottom: 26px;
+    cursor: pointer;
+}
+
+.login-container .login-form .input-group .password-container .icon-password-show {
     width: 24px;
     height: 24px;
     position: absolute;
@@ -400,7 +410,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: gray;
+    background-color: rgb(255, 255, 255);
+    color: #252641;
 }
 
 
@@ -451,6 +462,7 @@
     align-items: center;
     margin-bottom: 1px; 
     padding-right: 5px;
+    cursor: pointer;
 }
 .component-menu .menu-logo img {
     width: 50px;

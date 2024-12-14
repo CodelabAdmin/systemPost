@@ -44,7 +44,66 @@ if (!is_array($countProducts) || !isset($countProducts['count'])) {
 }
 ?>
 
+<style>
+    .skeleton {
+        animation: skeleton-loading 1s linear infinite alternate;
+    }
+
+    @keyframes skeleton-loading {
+        0% {
+            background-color: #e5e7eb;
+        }
+
+        100% {
+            background-color: #f3f4f6;
+        }
+    }
+
+    .skeleton-row {
+        display: flex;
+        padding: 1rem;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .skeleton-cell {
+        height: 20px;
+        border-radius: 4px;
+        margin-right: 1rem;
+    }
+
+    .skeleton-cell-small {
+        width: 80px;
+    }
+
+    .skeleton-cell-medium {
+        width: 150px;
+    }
+
+    .skeleton-cell-large {
+        width: 200px;
+    }
+
+    .skeleton-container {
+        width: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .skeleton-table {
+        display: none;
+        width: 1200px;
+        height: 350px;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+</style>
+
 <div class="page-productos">
+
+
+    <!-- Contenido principal -->
     <div class="container-header">
         <div class="content-info">
             <div class="content-title">
@@ -62,7 +121,8 @@ if (!is_array($countProducts) || !isset($countProducts['count'])) {
         </div>
         <div class="content-counter">
             <div class="content-info-counter">
-                <div class="info-counter">
+
+                <div  class="info-counter">
                     <div class="icono-counter">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
                             <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
@@ -78,11 +138,50 @@ if (!is_array($countProducts) || !isset($countProducts['count'])) {
             </div>
         </div>
     </div>
+
+    <!-- Skeleton loader -->
+    <div id="skeleton" class="skeleton-container">
+        <div id="skeleton-loader" class="skeleton-table">
+            <?php for ($i = 0; $i < 6; $i++): ?>
+                <div class="skeleton-row">
+                    <div class="skeleton-cell skeleton-cell-small skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-large skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-large skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-medium skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-small skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-small skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-large skeleton"></div>
+                    <div class="skeleton-cell skeleton-cell-medium skeleton"></div>
+                </div>
+            <?php endfor; ?>
+        </div>
+    </div>
     <div class="container-productos">
         <div class="container-Table-productos">
+
             <?php require('./components/Table/Table.productos.php'); ?>
         </div>
     </div>
-    <?php require ('./components/Modal/Modal.productos.php'); ?>
-
+    <?php require('./components/Modal/Modal.editarProductos.php'); ?>
+    <?php require('./components/Modal/Modal.productos.php'); ?>
 </div>
+
+<script>
+    function showSkeleton() {
+        document.getElementById('skeleton').style.display = 'flex';
+        document.getElementById('skeleton-loader').style.display = 'block';
+        document.querySelector('.container-Table-productos').style.display = 'none';
+    }
+
+    function hideSkeleton() {
+        document.getElementById('skeleton').style.display = 'none';
+        document.getElementById('skeleton-loader').style.display = 'none';
+
+        document.querySelector('.container-Table-productos').style.display = 'block';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        showSkeleton();
+        setTimeout(hideSkeleton, 2000);
+    });
+</script>

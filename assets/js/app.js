@@ -48,7 +48,14 @@ function toggleDropdown() {
     dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
 }
 
-function toggleModal() {
-    const modal = document.querySelector('.content-modal');
-    modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+function toggleModal(modalClass = '.content-modal') {
+	const modal = document.querySelector(modalClass);
+	if (!modal) return;
+	
+	const isVisible = modal.style.display === 'block';
+	modal.style.display = isVisible ? 'none' : 'block';
+}
+
+function toggleModalEdit() {
+	toggleModal('.content-modal-edit');
 }
