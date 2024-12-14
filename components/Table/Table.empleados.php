@@ -12,7 +12,7 @@ function getUser()
          return [];
       }
    } catch (Exception $e) {
-      throw new Exception("Error al cargar los empleados: " . $e->getMessage());
+      error_log("Error al cargar los empleados: " . $e->getMessage());
       return [];
    }
 }
@@ -22,21 +22,14 @@ if (!is_array($user)) {
    $user = [];
 }
 
-
 $usuariosPorPagina = 5;
 $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $totalUsuarios = count($user);
 $totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
 
-// Asegurarse de que la página actual es válida
 $paginaActual = max(1, min($paginaActual, $totalPaginas));
-
-// Calcular el índice de inicio para la página actual
 $indiceInicio = ($paginaActual - 1) * $usuariosPorPagina;
-
-// Obtener los productos para la página actual
 $usuariosEnPagina = array_slice($user, $indiceInicio, $usuariosPorPagina);
-
 
 function getPaginationRange($paginaActual, $totalPaginas, $maxPaginas = 3)
 {
@@ -48,7 +41,6 @@ function getPaginationRange($paginaActual, $totalPaginas, $maxPaginas = 3)
 
 $paginasAMostrar = getPaginationRange($paginaActual, $totalPaginas, 3);
 
-
 function formatText($text)
 {
    if ($text == null) {
@@ -59,7 +51,6 @@ function formatText($text)
    }
    return $text;
 };
-
 ?>
 
 <div class="container">
@@ -80,7 +71,7 @@ function formatText($text)
                <tr>
                   <td><?php echo $user['id_user']; ?></td>
                   <td><?php echo $user['fullname']; ?></td>
-                  <td><?php echo $user['email'] ?></td>
+                  <td><?php echo $user['email']; ?></td>
                   <td><?php echo $user['phone']; ?></td>
                   <td><?php echo $user['rol']; ?></td>
                   <td class="text-center acciones">
@@ -90,7 +81,7 @@ function formatText($text)
                            <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                         </svg>
                      </button>
-                     <button class="btn-accions delete">
+                     <button class="btn-accions delete" onclick="eliminarEmpleado(<?php echo $user['id_user']; ?>)">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
                            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
                         </svg>
@@ -121,5 +112,30 @@ function formatText($text)
          </a>
       </div>
    </div>
-
 </div>
+<script>
+function eliminarEmpleado(id) {
+    if (confirm('¿Estás seguro de que deseas eliminar este empleado?')) {
+        // Usamos la URL exacta que vemos en el error
+        fetch(`https://localhost/server/systemPost/api/users?id=${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include' // Agregamos esto para manejar las cookies si es necesario
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Empleado eliminado correctamente');
+                window.location.href = window.location.href; // Mejor manera de recargar
+            } else {
+                alert('Error al eliminar el empleado');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error al eliminar el empleado');
+        });
+    }
+}
+</script>
