@@ -1,10 +1,10 @@
-                <div class="content-modal" style="display: none;" >
+                <div class="content-modal-edit" style="display: none;" >
                     <div class="content-modal-container">
                         <div class="content-form">
                             <div class="header-modal">
                             <div class="content-title">
-                                <div class="title">Agregar Proveedor</div>
-                                <div class="close-modal" onclick='toggleModal()' >
+                                <div class="title">Editar Proveedor</div>
+                                <div class="close-modal" onclick='toggleModalEdit()' >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cancel-icon-modal">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                                     </svg>
@@ -13,41 +13,43 @@
                             <div class="separator"></div>
                         </div>
                         <div class="content-info">
-                            <form id="add-provider-form">
-                                
+                            <form id="provider-form" class="content-form">
+                                <input type="hidden" id="edit-id" name="id">
                                 <div class="form-row">
-                                    <input type="text" placeholder="Nombre" name="nombre">
-                                    <input type="text" placeholder="Telefono" name="telefono">
+                                    <input type="text" id="edit-nombre" placeholder="Nombre" name="nombre">
+                                    <input type="text" id="edit-telefono" placeholder="Telefono" name="telefono">
 
                                 </div>
                                 <div class="form-row">
-                                    <input type="text" placeholder="Dirección" name="direccion">
-                                    <input type="text" placeholder="Categoria" name="categoria">
+                                    <input type="text" id="edit-direccion" placeholder="Dirección" name="direccion">
+                                    <input type="text" id="edit-categoria" placeholder="Categoria" name="categoria">
                                 </div>
                                 <div class="form-row">
-                                    <input type="text" placeholder="Descripción" name="descripcion">
+                                    <input type="text" id="edit-descripcion" placeholder="Descripción" name="descripcion">
 
                                 </div>
                             </form>
                         </div>
                         <div class="content-buttons-suppliers">
-                            <div class="btn-modal button-cancel" onclick='toggleModal()'>Cancelar</div>
-                            <div class="btn-modal button-confirm" onclick='addsuppliers()'>Agregar</div>
+                            <div class="btn-modal button-cancel" onclick='toggleModalEdit()'>Cancelar</div>
+                            <div class="btn-modal button-confirm" onclick='editsuppliers()'>Agregar</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <script>
-                    async function addsuppliers() {
+                    async function editsuppliers() {
                         try {
                             //validacion
-                            const fullname = document.querySelector('input[name="nombre"]').value;
-                            const phone = document.querySelector('input[name="telefono"]').value;
-                            const address = document.querySelector('input[name="direccion"]').value;
-                            const description = document.querySelector('input[name="descripcion"]').value;
-                            const category = document.querySelector('input[name="categoria"]').value;
+                            const providerId = document.querySelector('input[id="edit-id"]').value;
+                            const fullname = document.querySelector('input[id="edit-nombre"]').value;
+                            const phone = document.querySelector('input[id="edit-telefono"]').value;
+                            const address = document.querySelector('input[id="edit-direccion"]').value;
+                            const description = document.querySelector('input[id="edit-descripcion"]').value;
+                            const category = document.querySelector('input[id="edit-categoria"]').value;
                             
+                           
                             // Validar que los campos no estén vacíos
                             if (!fullname || !phone || !category || !address || !description) {
                                 await Swal.fire({
@@ -101,8 +103,8 @@
                             });
 
                             try {
-                                const response = await fetch('http://localhost/server/systemPost/api/suppliers', {
-                                    method: 'POST',
+                                const response = await fetch(`http://localhost/server/systemPost/api/suppliers?id=${providerId}`, {
+                                    method: 'PUT',
                                     headers: {
                                         'Content-Type': 'application/json',
                                         'Accept': 'application/json'
@@ -140,22 +142,17 @@
                                 if (data.status === 'Success') {
                                     await Swal.fire({
                                         title: 'Éxito',
-                                        text: 'Proveedor agregado correctamente',
+                                        text: 'Proveedor editado correctamente',
                                         icon: 'success',
                                         confirmButtonText: 'Aceptar',
                                         allowOutsideClick: false
                                     });
-                                    
-                                    // Cerrar el modal de producto
-                                    document.querySelector('.content-modal').style.display = 'none';
-                                    
-                                    // Limpiar el formulario
-                                    document.getElementById('add-provider-form').reset();
+                                    toggleModalEdit();
                                     
                                     // Recargar la página
                                     location.reload();
                                 } else {
-                                    throw new Error(data.message || 'Error al agregar el proveedor');
+                                    throw new Error(data.message || 'Error al editar el proveedor');
                                 }
 
                             } catch (error) {

@@ -78,8 +78,8 @@ function formatText($text)
                   <td><?php echo $proveedor['address']; ?></td>
                   <td><?php echo $proveedor['description']; ?></td>
                   <td><?php echo $proveedor['category']; ?></td>
-                  <td class="text-center acciones">
-                     <button class="btn-accions edit">
+                  <td class="text-center acciones" >
+                     <button class="btn-accions edit" onclick='editarProveedores(<?php echo json_encode($proveedor); ?>)'>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
                            <path
                               d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
@@ -94,27 +94,6 @@ function formatText($text)
                               clip-rule="evenodd" />
                         </svg>
                      </button>
-                     <script>
-                        function eliminarProveedor(id) {
-                           if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
-                              // Realiza la solicitud AJAX para eliminar el proveedor
-                              fetch(`http://localhost/server/systemPost/api/suppliers/deactivate?id=${id}`, {
-                                 method: 'PATCH'
-                              })
-                              .then(async response => {
-                                 if (response.ok) {
-                                    alert('Proveedor eliminado correctamente');
-                                    location.reload(); // Recargar la página para ver los cambios
-                                 } else {
-                                    alert('Error al eliminar el proveedor.');
-                                 }
-                              })
-                              .catch(error => {
-                                 console.error('Error:', error);
-                              });
-                           }
-                        }
-                     </script>
                   </td>
                </tr>
             <?php endforeach; ?>
@@ -148,5 +127,47 @@ function formatText($text)
          </a>
       </div>
    </div>
-
 </div>
+<script>
+   function editarProveedores(proveedor) {
+      try{
+         
+         if (typeof proveedor === 'string') {
+            proveedor = JSON.parse(proveedor);
+         }
+         toggleModalEdit();
+
+         if(proveedor){
+            document.getElementById('edit-id').value = proveedor.id_supplier;
+            document.getElementById('edit-nombre').value = proveedor.fullname;
+            document.getElementById('edit-telefono').value = proveedor.phone;
+            document.getElementById('edit-direccion').value = proveedor.address;
+            document.getElementById('edit-descripcion').value = proveedor.description;
+            document.getElementById('edit-categoria').value = proveedor.category;
+         }
+      } catch (error) {
+         console.error('Error al editar proveedor:', error);
+      }
+   }
+
+   function eliminarProveedor(id) {
+      if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
+         // Realiza la solicitud AJAX para eliminar el proveedor
+         fetch(`http://localhost/server/systemPost/api/suppliers/deactivate?id=${id}`, {
+            method: 'PATCH'
+         })
+         .then(async response => {
+            if (response.ok) {
+               alert('Proveedor eliminado correctamente');
+               location.reload(); // Recargar la página para ver los cambios
+            } else {
+               alert('Error al eliminar el proveedor.');
+            }
+         })
+         .catch(error => {
+            console.error('Error:', error);
+         });
+      }
+   }                   
+</script>
+
