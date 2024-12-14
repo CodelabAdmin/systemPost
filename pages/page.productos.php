@@ -132,8 +132,8 @@ $countProducts = countProducts();
             <?php require('./components/Table/Table.productos.php'); ?>
         </div>
     </div>
+    <?php require('./components/Modal/Modal.editarProductos.php'); ?>
     <?php require('./components/Modal/Modal.productos.php'); ?>
-
 </div>
 
 <script>

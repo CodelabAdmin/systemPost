@@ -22,8 +22,6 @@ if (!is_array($productos)) {
    $productos = [];
 }
 
-// echo "<script>console.log(" . json_encode($productos) . ");</script>";
-
 $productosPorPagina = 5;
 $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $totalProductos = count($productos);
