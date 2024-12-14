@@ -2,7 +2,7 @@
 function countUsers()
 {
     try {
-        $url = "http://localhost/server/systemPost/api/users/count";
+        $url = "https://systempost.onrender.com/api/users/count";
         $response = file_get_contents($url);
         $data = json_decode($response, true);
 

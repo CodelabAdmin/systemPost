@@ -2,7 +2,7 @@
 function countSuppliers()
 {
     try {
-        $url = "http://localhost/server/systemPost/api/suppliers/count";
+        $url = "https://systempost.onrender.com/api/suppliers/count";
         $response = file_get_contents($url);
         $data = json_decode($response, true);
 
