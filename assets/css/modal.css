@@ -160,7 +160,6 @@
     gap: 10px;
     padding-left: 5px;
 }
-
 .content-modal .content-modal-container .content-info-empleados .content-input-form2 input::placeholder{
     font-weight: bold;
     color: rgb(172, 168, 168);
