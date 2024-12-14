@@ -1,157 +1,55 @@
-<?php
-function countProducts()
+<?php 
+function countUsers()
 {
     try {
-        $url = "http://localhost/server/systemPost/api/products/count";
+        $url = "http://localhost/server/systemPost/api/users/count";
         $response = file_get_contents($url);
         $data = json_decode($response, true);
 
-        return ['count' => $data["COUNT(*)"]];
+        return ['count' => $data['COUNT(*)']];
     } catch (Exception $e) {
         return ['count' => 0];
     }
 }
-$countProducts = countProducts();
+$countUsers = countUsers();
 ?>
 
-<style>
-    .skeleton {
-        animation: skeleton-loading 1s linear infinite alternate;
-    }
-
-    @keyframes skeleton-loading {
-        0% {
-            background-color: #e5e7eb;
-        }
-
-        100% {
-            background-color: #f3f4f6;
-        }
-    }
-
-    .skeleton-row {
-        display: flex;
-        padding: 1rem;
-        border-bottom: 1px solid #e5e7eb;
-    }
-
-    .skeleton-cell {
-        height: 20px;
-        border-radius: 4px;
-        margin-right: 1rem;
-    }
-
-    .skeleton-cell-small {
-        width: 80px;
-    }
-
-    .skeleton-cell-medium {
-        width: 150px;
-    }
-
-    .skeleton-cell-large {
-        width: 200px;
-    }
-
-    .skeleton-container {
-        width: 100%;
-        display: none;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .skeleton-table {
-        display: none;
-        width: 1200px;
-        height: 350px;
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-</style>
-
-<div class="page-productos">
-
-
-    <!-- Contenido principal -->
-    <div class="container-header">
-        <div class="content-info">
-            <div class="content-title">
-                Productos
+<div class="page-empleados">
+    <div class="container-header-empleados">
+        <div class="content-info-empleados">
+            <div class="content-title-empleados">
+            Empleados
             </div>
-            <div class="content-descripcion">
-                El módulo de productos gestiona la información de los productos del sistema, permitiendo registrar, actualizar, eliminar y consultar sus datos de forma eficiente. Facilita la organización del inventario y garantiza que los usuarios puedan acceder a detalles clave de cada producto, como nombre, stock, precio y categoría.
+            <div class="content-description-empleados">
+            El módulo de empleados gestiona la información y permisos de los usuarios que interactúan con el sistema, 
+            permitiendo registrar, autenticar y administrar sus datos de manera segura. Facilita la creación, modificación, 
+            eliminación y consulta de usuarios, y controla el acceso según roles asignados.
             </div>
-            <div class="btn-add-product" onclick="toggleModal()">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon-btn-add">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                <div>Crear</div>
-            </div>
+            <div class="buttom" onClick="toggleModal()">+ Crear</div>
         </div>
-        <div class="content-counter">
-            <div class="content-info-counter">
-
-                <div  class="info-counter">
-                    <div class="icono-counter">
+        <div class="content-counter-empleados">
+            <div class="content-info-counter-empleados">
+                <div class="info-counter-empleados">
+                    <div class="icono-counter-empleados">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                            <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
+                            <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <div class="number-counter">
-                        <?php echo $countProducts['count']; ?>
+                    <div class="number-counter-empleados">
+                        <?php echo $countUsers['count'] ?>
                     </div>
                 </div>
-                <div class="title-counter">
-                    cantidad de productos
+                <div class="title-counter-empleados">
+                    Empleados Totales
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Skeleton loader -->
-    <div id="skeleton" class="skeleton-container">
-        <div id="skeleton-loader" class="skeleton-table">
-            <?php for ($i = 0; $i < 6; $i++): ?>
-                <div class="skeleton-row">
-                    <div class="skeleton-cell skeleton-cell-small skeleton"></div>
-                    <div class="skeleton-cell skeleton-cell-large skeleton"></div>
-                    <div class="skeleton-cell skeleton-cell-large skeleton"></div>
-                    <div class="skeleton-cell skeleton-cell-medium skeleton"></div>
-                    <div class="skeleton-cell skeleton-cell-small skeleton"></div>
-                    <div class="skeleton-cell skeleton-cell-small skeleton"></div>
-                    <div class="skeleton-cell skeleton-cell-large skeleton"></div>
-                    <div class="skeleton-cell skeleton-cell-medium skeleton"></div>
-                </div>
-            <?php endfor; ?>
+    <div class="container-table-empleados">
+        <div class="table-empleados">
+            <?php require('./components/Table/Table.empleados.php') ?>   
         </div>
     </div>
-    <div class="container-productos">
-        <div class="container-Table-productos">
-
-            <?php require('./components/Table/Table.productos.php'); ?>
-        </div>
-    </div>
-    <?php require('./components/Modal/Modal.productos.php'); ?>
-
+    <?php require('components/Modal/Modal-empleados.php') ?>
 </div>
-
-<script>
-    function showSkeleton() {
-        document.getElementById('skeleton').style.display = 'flex';
-        document.getElementById('skeleton-loader').style.display = 'block';
-        document.querySelector('.container-Table-productos').style.display = 'none';
-    }
-
-    function hideSkeleton() {
-        document.getElementById('skeleton').style.display = 'none';
-        document.getElementById('skeleton-loader').style.display = 'none';
-
-        document.querySelector('.container-Table-productos').style.display = 'block';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        showSkeleton();
-        setTimeout(hideSkeleton, 2000);
-    });
-</script>
