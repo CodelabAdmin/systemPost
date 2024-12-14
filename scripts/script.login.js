@@ -58,7 +58,6 @@ async function obtener_datos(email, pass){
             $("#btn_submit").slideDown(0)
             $("#btn_disabled").slideUp(0)
         }
-        console.log(data)
     } catch (error) {
         console.error(error)
         $("#btn_submit").slideDown(0)
