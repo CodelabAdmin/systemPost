@@ -56,7 +56,6 @@
     flex-direction: column;
     gap: 15px;
 }
-
 .page-productos .container-header .content-counter .content-info-counter .info-counter {
     width: 100%;
     display: flex;
@@ -105,3 +104,172 @@
     height: 550px;
 }
 
+.page-productos .container-header .content-info .btn-add-product {
+    width: 120px;
+    height: 40px;
+    background-color: #6668c5;
+    color: #f1f5fc;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    font-size: 20px;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.page-productos .container-header .content-info .btn-add-product .icon-btn-add {
+    width: 26px;
+    height: 26px;
+}
+
+.content-modal .content-modal-container .content-form {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.content-modal .content-modal-container .content-form .container-product {
+    display: flex;
+}
+
+.content-modal .content-modal-container .content-form .container-product .column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.content-modal .content-modal-container .content-form .container-product .column .input-product {
+    width: 90%;
+    height: 30px;
+    padding: 20px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.content-modal .content-modal-container .content-form .container-product .column select {
+    width: 90%;
+    height: 40px;
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.content-modal .content-modal-container .content-form .container-product .column .textarea {
+    resize: none;
+    height: 160px;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+.content-modal .content-modal-container .content-buttons-product{
+    display: flex;
+    justify-content: end;
+    padding-right: 20px;
+}
+ 
+ .content-modal .content-modal-container .content-buttons-product .btn-modal {
+    margin: 10px 5px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 25px;
+    display: flex;
+ }
+ 
+ .content-modal .content-modal-container .content-buttons-product .button-cancel-product {
+    background-color: #dc3545;
+    color: white;
+ }
+ .content-modal .content-modal-container .content-buttons-product  .button-cancel-product:hover {
+    background-color: #c82333;
+ }
+ .content-modal .content-modal-container .content-buttons-product .button-confirm-product {
+    background-color: #5555ad;
+    color: white;
+ }
+ .content-modal .content-modal-container .content-buttons-product .button-confirm-product:hover {
+    background-color: #5050c7;
+ }
+
+.content-modal-edit .content-modal-container .content-form {
+     display: flex;
+     flex-direction: column;
+     overflow: hidden;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-form .container-product {
+     display: flex;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-form .container-product .column {
+     display: flex;
+     flex-direction: column;
+     gap: 1rem;
+     align-items: center;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-form .container-product .column .input-product {
+     width: 90%;
+     height: 30px;
+     padding: 20px 10px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     font-size: 16px;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-form .container-product .column select {
+     width: 90%;
+     height: 40px;
+     padding: 2px;
+     border: 1px solid #ccc;
+     border-radius: 5px;
+     font-size: 16px;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-form .container-product .column .textarea {
+     resize: none;
+     height: 160px;
+     font-size: 16px;
+     font-family: sans-serif;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-buttons-product {
+     display: flex;
+     justify-content: end;
+     padding-right: 20px;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-buttons-product .btn-modal {
+     margin: 10px 5px;
+     text-align: center;
+     font-size: 16px;
+     border-radius: 5px;
+     font-weight: bold;
+     cursor: pointer;
+     padding: 10px 25px;
+     display: flex;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-buttons-product .button-cancel-product {
+     background-color: #dc3545;
+     color: white;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-buttons-product .button-cancel-product:hover {
+     background-color: #c82333;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-buttons-product .button-confirm-product {
+     background-color: #5555ad;
+     color: white;
+ }
+ 
+ .content-modal-edit .content-modal-container .content-buttons-product .button-confirm-product:hover {
+     background-color: #5050c7;
+ }

@@ -1,0 +1,7 @@
+{
+    "name": "codelabAcademy/system-post",
+    "description": "Sistema de ventas",
+    "require": {
+        "php": "^8.1"
+    }
+} 

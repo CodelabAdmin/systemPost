@@ -1,13 +1,32 @@
-<?php ?>
+<?php 
+function countSuppliers()
+{
+    try {
+        $url = "http://localhost/server/systemPost/api/suppliers/count";
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+
+        return ['count' => $data["COUNT(*)"]];
+    } catch (Exception $e) {
+        return ['count' => 0];
+    }
+}
+$countSuppliers = countSuppliers();
+?>
+
 <div class="page-proveedores">
     <div class="container-header-proveedores">
         <div class="content-info-proveedores">
             <div class="content-title-proveedores">
-            Proveedores
+                Proveedores
             </div>
             <div class="content-description-proveedores">
-            El módulo de proveedores gestiona la información y relaciones de los proveedores, permitiendo su registro, modificación, eliminación y consulta. Facilita el seguimiento de productos y servicios, así como la gestión de contratos, asegurando un control adecuado de la cadena de suministro.
+                El módulo de proveedores gestiona la información y relaciones de los proveedores, permitiendo su registro, modificación, eliminación y consulta. Facilita el seguimiento de productos y servicios, así como la gestión de contratos, asegurando un control adecuado de la cadena de suministro.
             </div>
+            <div class="container-create-button">
+                <button class="create-button" onclick="toggleModal()" >+ Crear</button>
+            </div>
+
         </div>
         <div class="content-counter-proveedores">
             <div class="content-info-counter-proveedores">
@@ -18,7 +37,7 @@
                         </svg>
                     </div>
                     <div class="number-counter-proveedores">
-                        30
+                        <?php echo $countSuppliers['count']; ?>
                     </div>
                 </div>
                 <div class="title-counter-proveedores">
@@ -34,3 +53,5 @@
         </div>
     </div>
 </div>
+
+<?php require('./components/Modal/Modal.proveedor.php') ?>

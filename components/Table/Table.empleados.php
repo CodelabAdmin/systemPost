@@ -1,221 +1,41 @@
 <?php
-// Datos de prueba
-$productos = [
-   [
-      'id' => 1,
-      'nombre' => 'Laptop Ultradelgada',
-      'descripcion' => 'Laptop de última generación ',
-      'precio' => 1299.99,
-      'cantidad' => 50,
-      'activo' => true,
-      'fecha_creacion' => '01/03/2024'
-   ],
-   [
-      'id' => 2,
-      'nombre' => 'Smartphone 5G',
-      'descripcion' => 'Teléfono inteligente con cámara de ',
-      'precio' => 799.99,
-      'cantidad' => 100,
-      'activo' => true,
-      'fecha_creacion' => '15/02/2024'
-   ],
-   [
-      'id' => 3,
-      'nombre' => 'Auriculares Inalámbricos',
-      'descripcion' => 'Auriculares con cancelación de ruido',
-      'precio' => 199.99,
-      'cantidad' => 200,
-      'activo' => true,
-      'fecha_creacion' => '20/01/2024'
-   ],
-   [
-      'id' => 4,
-      'nombre' => 'Smartwatch Deportivo',
-      'descripcion' => 'Reloj inteligente con GPS y monitor ',
-      'precio' => 249.99,
-      'cantidad' => 75,
-      'activo' => false,
-      'fecha_creacion' => '05/03/2024'
-   ],
-   [
-      'id' => 5,
-      'nombre' => 'Cámara DSLR Profesional',
-      'descripcion' => 'Cámara de 24MP con lente intercambiable',
-      'precio' => 1499.99,
-      'cantidad' => 25,
-      'activo' => true,
-      'fecha_creacion' => '10/02/2024'
-   ],
-   [
-      'id' => 6,
-      'nombre' => 'Tablet Android',
-      'descripcion' => 'Tablet de 10 pulgadas con 64GB de almacenamiento',
-      'precio' => 299.99,
-      'cantidad' => 150,
-      'activo' => true,
-      'fecha_creacion' => '05/03/2024'
-   ],
-   [
-      'id' => 7,
-      'nombre' => 'Consola de Videojuegos',
-      'descripcion' => 'Consola de última generación con 1TB de almacenamiento',
-      'precio' => 499.99,
-      'cantidad' => 80,
-      'activo' => true,
-      'fecha_creacion' => '20/02/2024'
-   ],
-   [
-      'id' => 8,
-      'nombre' => 'Impresora Multifuncional',
-      'descripcion' => 'Impresora, escáner y copiadora con WiFi',
-      'precio' => 179.99,
-      'cantidad' => 60,
-      'activo' => false,
-      'fecha_creacion' => '15/01/2024'
-   ],
-   [
-      'id' => 9,
-      'nombre' => 'Monitor 4K',
-      'descripcion' => 'Monitor de 27 pulgadas con resolución 4K',
-      'precio' => 349.99,
-      'cantidad' => 40,
-      'activo' => true,
-      'fecha_creacion' => '01/03/2024'
-   ],
-   [
-      'id' => 10,
-      'nombre' => 'Teclado Mecánico',
-      'descripcion' => 'Teclado gaming con switches Cherry MX',
-      'precio' => 129.99,
-      'cantidad' => 100,
-      'activo' => true,
-      'fecha_creacion' => '10/02/2024'
-   ],
-   [
-      'id' => 11,
-      'nombre' => 'Disco Duro Externo',
-      'descripcion' => 'Disco duro portátil de 2TB con USB 3.0',
-      'precio' => 89.99,
-      'cantidad' => 200,
-      'activo' => true,
-      'fecha_creacion' => '25/02/2024'
-   ],
-   [
-      'id' => 12,
-      'nombre' => 'Altavoz Bluetooth',
-      'descripcion' => 'Altavoz portátil resistente al agua',
-      'precio' => 79.99,
-      'cantidad' => 120,
-      'activo' => true,
-      'fecha_creacion' => '05/01/2024'
-   ],
-   [
-      'id' => 13,
-      'nombre' => 'Router WiFi',
-      'descripcion' => 'Router de doble banda con tecnología WiFi 6',
-      'precio' => 149.99,
-      'cantidad' => 75,
-      'activo' => false,
-      'fecha_creacion' => '18/02/2024'
-   ],
-   [
-      'id' => 14,
-      'nombre' => 'Webcam HD',
-      'descripcion' => 'Cámara web 1080p con micrófono integrado',
-      'precio' => 59.99,
-      'cantidad' => 150,
-      'activo' => true,
-      'fecha_creacion' => '22/01/2024'
-   ],
-   [
-      'id' => 15,
-      'nombre' => 'Batería Externa',
-      'descripcion' => 'Powerbank de 20000mAh con carga rápida',
-      'precio' => 49.99,
-      'cantidad' => 180,
-      'activo' => true,
-      'fecha_creacion' => '28/02/2024'
-   ],
-   [
-      'id' => 16,
-      'nombre' => 'Tarjeta Gráfica',
-      'descripcion' => 'GPU de gama alta para gaming y diseño',
-      'precio' => 699.99,
-      'cantidad' => 30,
-      'activo' => true,
-      'fecha_creacion' => '12/03/2024'
-   ],
-   [
-      'id' => 17,
-      'nombre' => 'Silla Gaming',
-      'descripcion' => 'Silla ergonómica con soporte lumbar',
-      'precio' => 199.99,
-      'cantidad' => 50,
-      'activo' => true,
-      'fecha_creacion' => '08/01/2024'
-   ],
-   [
-      'id' => 18,
-      'nombre' => 'Proyector HD',
-      'descripcion' => 'Proyector portátil con resolución 1080p',
-      'precio' => 279.99,
-      'cantidad' => 35,
-      'activo' => false,
-      'fecha_creacion' => '03/03/2024'
-   ],
-   [
-      'id' => 19,
-      'nombre' => 'Smartband',
-      'descripcion' => 'Pulsera inteligente con monitor de actividad',
-      'precio' => 39.99,
-      'cantidad' => 250,
-      'activo' => true,
-      'fecha_creacion' => '17/02/2024'
-   ],
-   [
-      'id' => 20,
-      'nombre' => 'Adaptador USB-C',
-      'descripcion' => 'Hub multipuerto con HDMI y lector de tarjetas',
-      'precio' => 69.99,
-      'cantidad' => 100,
-      'activo' => true,
-      'fecha_creacion' => '26/01/2024'
-   ],
-   [
-      'id' => 21,
-      'nombre' => 'Adaptador USB-C',
-      'descripcion' => 'Hub multipuerto con HDMI y lector de tarjetas',
-      'precio' => 69.99,
-      'cantidad' => 100,
-      'activo' => true,
-      'fecha_creacion' => '26/01/2024'
-   ],
-   [
-      'id' => 22,
-      'nombre' => 'Adaptador USB-C',
-      'descripcion' => 'Hub multipuerto con HDMI y lector de tarjetas',
-      'precio' => 69.99,
-      'cantidad' => 100,
-      'activo' => true,
-      'fecha_creacion' => '26/01/2024'
-   ]
+function getUser()
+{
+   try {
+      $url = "http://localhost/server/systemPost/api/users";
+      $response = file_get_contents($url);
+      $data = json_decode($response, true);
 
-];
+      if ($data && isset($data['users'])) {
+         return $data['users'];
+      } else {
+         return [];
+      }
+   } catch (Exception $e) {
+      throw new Exception("Error al cargar los empleados: " . $e->getMessage());
+      return [];
+   }
+}
+
+$user = getUser();
+if (!is_array($user)) {
+   $user = [];
+}
 
 
-$productosPorPagina = 5;
+$usuariosPorPagina = 5;
 $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-$totalProductos = count($productos);
-$totalPaginas = ceil($totalProductos / $productosPorPagina);
+$totalUsuarios = count($user);
+$totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
 
 // Asegurarse de que la página actual es válida
 $paginaActual = max(1, min($paginaActual, $totalPaginas));
 
 // Calcular el índice de inicio para la página actual
-$indiceInicio = ($paginaActual - 1) * $productosPorPagina;
+$indiceInicio = ($paginaActual - 1) * $usuariosPorPagina;
 
 // Obtener los productos para la página actual
-$productosEnPagina = array_slice($productos, $indiceInicio, $productosPorPagina);
+$usuariosEnPagina = array_slice($user, $indiceInicio, $usuariosPorPagina);
 
 
 function getPaginationRange($paginaActual, $totalPaginas, $maxPaginas = 3)
@@ -256,13 +76,13 @@ function formatText($text)
             </tr>
          </thead>
          <tbody>
-            <?php foreach ($productosEnPagina as $producto): ?>
+            <?php foreach ($usuariosEnPagina as $user): ?>
                <tr>
-                  <td><?php echo $producto['id']; ?></td>
-                  <td><?php echo $producto['nombre']; ?></td>
-                  <td><?php echo  formatText($producto['descripcion']) ?></td>
-                  <td><?php echo $producto['precio']; ?></td>
-                  <td class="text-center"><?php echo $producto['cantidad']; ?></td>
+                  <td><?php echo $user['id_user']; ?></td>
+                  <td><?php echo $user['fullname']; ?></td>
+                  <td><?php echo $user['email'] ?></td>
+                  <td><?php echo $user['phone']; ?></td>
+                  <td><?php echo $user['rol']; ?></td>
                   <td class="text-center acciones">
                      <button class="btn-accions edit">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">

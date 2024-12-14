@@ -106,3 +106,11 @@ $AppRoutes->AddRoutes('DELETE', 'users', function () {
     setHttpResponseUsers($response['status']);
     echo json_encode($response);
 });
+
+$AppRoutes->AddRoutes('GET', 'users/count', function () {
+    require_once 'models/users.php';
+    $users = new usersModel();
+    $response = $users->countUsers();
+    echo json_encode($response);
+});
+

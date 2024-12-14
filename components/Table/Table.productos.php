@@ -1,28 +1,60 @@
 <?php
 function getProducts()
 {
-   try {
-      $url = "http://localhost/server/systemPost/api/products";
-      $response = file_get_contents($url);
-      $data = json_decode($response, true);
-
-      if ($data && isset($data['products'])) {
-         return $data['products'];
-      } else {
-         return [];
-      }
-   } catch (Exception $e) {
-      throw new Exception("Error al cargar los productos: " . $e->getMessage());
-      return [];
-   }
+    try {
+        // Obtener la URL base dinámicamente
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
+        $host = $_SERVER['HTTP_HOST'];
+        $baseUrl = $protocol . $host;
+        
+        // Construir la URL de la API
+        $url = $baseUrl . "/api/products";
+        
+        // Configurar el contexto de la petición
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'GET',
+                'header' => 'Content-Type: application/json',
+                'ignore_errors' => true,
+                'timeout' => 30
+            ]
+        ]);
+        
+        // Realizar la petición
+        $response = file_get_contents($url, false, $context);
+        
+        if ($response === FALSE) {
+            error_log("Error al obtener productos: No se pudo conectar con la API");
+            return [];
+        }
+        
+        // Decodificar la respuesta
+        $data = json_decode($response, true);
+        
+        // Verificar si la respuesta es válida
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            error_log("Error al decodificar JSON: " . json_last_error_msg());
+            return [];
+        }
+        
+        // Verificar si hay productos en la respuesta
+        if ($data && isset($data['products'])) {
+            return $data['products'];
+        }
+        
+        return [];
+    } catch (Exception $e) {
+        error_log("Error en getProducts: " . $e->getMessage());
+        return [];
+    }
 }
+
 
 $productos = getProducts();
 if (!is_array($productos)) {
    $productos = [];
 }
 
-// echo "<script>console.log(" . json_encode($productos) . ");</script>";
 
 $productosPorPagina = 5;
 $paginaActual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
@@ -104,7 +136,7 @@ $activo = false;
                      </td>
                      <td class="text-center"><?php echo date('d/m/Y', strtotime($producto['create_at'])); ?></td>
                      <td class="text-center acciones">
-                        <button class="btn-accions edit" onclick="editProduct(<?php echo $producto['id_product']; ?>)">
+                        <button class="btn-accions edit" onclick="editarProducto(<?php echo htmlspecialchars(json_encode($producto)); ?>)">
                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
                               <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
                               <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
@@ -138,5 +170,19 @@ $activo = false;
          </a>
       </div>
    </div>
-
 </div>
+
+<script>
+   function editarProducto(producto) {
+      // Primero abrimos el modal
+      toggleModalEdit();
+      // Luego rellenamos los campos del formulario con la información del producto
+      document.getElementById('edit-id').value = producto.id_product;
+      document.getElementById('edit-nombre').value = producto.name;
+      document.getElementById('edit-descripcion').value = producto.description;
+      document.getElementById('edit-precio').value = producto.product_price.toString();
+      document.getElementById('edit-stock').value = producto.stock.toString();
+      document.getElementById('edit-categoria').value = producto.category;
+   //  document.getElementById('edit-status').value = producto.status;
+   }
+</script>
