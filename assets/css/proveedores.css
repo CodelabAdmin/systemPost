@@ -164,7 +164,45 @@ input[type="text"], input[type="email"] {
 
 .content-modal-edit .content-modal-container .content-buttons-suppliers .btn-modal {
     margin: 10px 5px;
-    text-align: center;
+    text-align: center; 
+    font-size: 16px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 25px;
+    display: flex;
+    color: #fff;
+ }
+
+
+ 
+.content-modal .content-modal-container .content-buttons-suppliers{
+    display: flex;
+    justify-content: end;
+    padding-right: 20px;
+}
+
+.content-modal .content-modal-container .content-buttons-suppliers .button-cancel{
+    background-color: rgb(244, 55, 55);
+    color: white;
+}
+
+.content-modal .content-modal-container .content-buttons-suppliers .button-confirm{
+    background-color: rgb(74, 148, 245);
+    color: white;
+}
+
+.content-modal .content-modal-container .content-buttons-suppliers .button-cancel:hover{
+    background-color: rgb(248, 35, 35);
+}
+
+.content-modal .content-modal-container .content-buttons-suppliers .button-confirm:hover{
+    background-color: rgb(29, 120, 240);
+}
+
+.content-modal .content-modal-container .content-buttons-suppliers .btn-modal {
+    margin: 10px 5px;
+    text-align: center; 
     font-size: 16px;
     border-radius: 5px;
     font-weight: bold;
