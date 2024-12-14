@@ -51,5 +51,12 @@ $countUsers = countUsers();
             <?php require('./components/Table/Table.empleados.php') ?>   
         </div>
     </div>
-    <?php require('components/Modal/Modal-empleados.php') ?>
+    <div class="container-productos">
+        <div class="container-Table-productos">
+
+            <?php require('./components/Table/Table.productos.php'); ?>
+        </div>
+    </div>
+    <?php require('./components/Modal/Modal.editarProductos.php'); ?>
+    <?php require('./components/Modal/Modal.productos.php'); ?>
 </div>
