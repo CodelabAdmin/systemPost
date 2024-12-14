@@ -7,6 +7,7 @@
         'inventario',
         'productos',
         'empleados',
+        'reportes'
 
     );
     foreach($listRoutes as $route) {
