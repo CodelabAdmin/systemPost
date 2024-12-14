@@ -115,7 +115,7 @@
                     }
                 });
 
-                const response = await fetch('http://localhost/server/systemPost/api/products', {
+                const response = await fetch('https://systempost.onrender.com/api/products', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

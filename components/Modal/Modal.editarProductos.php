@@ -117,7 +117,7 @@
             }
         });
 
-        const response = await fetch(`http://localhost/server/systemPost/api/products?id=${productId}`, {
+        const response = await fetch(`https://systempost.onrender.com/api/products?id=${productId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

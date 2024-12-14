@@ -7,7 +7,7 @@ $(document).ready(async function () {
 async function countSuppliers() {
   try {
     let res = await fetch(
-      "http://localhost/server/systemPost/api/suppliers/count"
+      "https://systempost.onrender.com/api/suppliers/count"
     );
     let data = await res.json();
     return { count: data["COUNT(*)"] };

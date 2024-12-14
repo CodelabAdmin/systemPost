@@ -2,7 +2,7 @@
 function getProveedores()
 {
    try {
-      $url = "http://localhost/server/systemPost/api/suppliers?status=activo";
+      $url = "https://systempost.onrender.com/api/suppliers?status=activo";
       $response = file_get_contents($url);
       $data = json_decode($response, true);
 
@@ -98,7 +98,7 @@ function formatText($text)
                         function eliminarProveedor(id) {
                            if (confirm('¿Estás seguro de que deseas eliminar este proveedor?')) {
                               // Realiza la solicitud AJAX para eliminar el proveedor
-                              fetch(`http://localhost/server/systemPost/api/suppliers/deactivate?id=${id}`, {
+                              fetch(`https://systempost.onrender.com/api/suppliers/deactivate?id=${id}`, {
                                  method: 'PATCH'
                               })
                               .then(async response => {
