@@ -2,13 +2,8 @@
 function countProducts()
 {
     try {
-        // Obtener la URL base dinámicamente
-        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
-        $host = $_SERVER['HTTP_HOST'];
-        $baseUrl = $protocol . $host;
-        
         // Construir la URL completa
-        $url = $baseUrl . "/api/products/count";
+        $url = "https://systempost.onrender.com/api/products/count";
         
         // Configurar el contexto para manejar posibles errores
         $context = stream_context_create([
