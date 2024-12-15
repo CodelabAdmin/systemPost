@@ -9,4 +9,11 @@
       echo json_encode($response);
    });
 
+   $AppRoutes->AddRoutes('GET', 'sales', function() {
+      require_once 'models/sales.php';
+      $sales = new SalesModel();
+      $response = $sales->getSales();
+      echo json_encode($response);
+   });
+
    ?>
