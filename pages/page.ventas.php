@@ -488,12 +488,10 @@ function formatText($text)
         }
 
         function actualizarCantidad(idProducto, cambio) {
-            console.log('Actualizando cantidad:', idProducto, cambio); // Debug
             const item = carritoVenta.find(item => item.id_product === parseInt(idProducto) || item.id_product === idProducto);
 
             if (item) {
                 const nuevaCantidad = item.cantidad + cambio;
-                console.log('Nueva cantidad:', nuevaCantidad); // Debug
 
                 if (nuevaCantidad <= 0) {
                     Swal.fire({
