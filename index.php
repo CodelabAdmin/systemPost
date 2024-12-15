@@ -1,11 +1,16 @@
 <?php
+// Iniciar output buffering y sesión antes de cualquier salida
+ob_start();
+session_start();
+
+// Configuración de errores
+// 1. Mostrar errores
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,20 +25,23 @@ error_reporting(E_ALL);
 </head>
 
 <body class="poppins">
-
     <?php
-    session_start();
-    if (!isset($_SESSION['user'])) {
-        require 'pages/page.login.php';
-    } else {
-        require 'core/app.php';
-        $AppRoutes = new AppRoutes;
-        require 'routes/routes.php';
-        $listRoutes = $AppRoutes->getRoutes();
-        $AppViews = new AppViews($listRoutes);
-        require 'layout/layout.php';
+    try {
+        if (!isset($_SESSION['user'])) {
+            require 'pages/page.login.php';
+        } else {
+            require 'core/app.php';
+            $AppRoutes = new AppRoutes;
+            require 'routes/routes.php';
+            $listRoutes = $AppRoutes->getRoutes();
+            $AppViews = new AppViews($listRoutes);
+            require 'layout/layout.php';
+        }
+    } catch (Exception $e) {
+        error_log("Error en la aplicación: " . $e->getMessage());
     }
     ?>
+
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/apiManager.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -47,7 +55,9 @@ error_reporting(E_ALL);
         $AppScript = new AppScript($listRoutes);
         $AppScript->loadScript();
     }
+    
+    // Limpiar y enviar el output
+    ob_end_flush();
     ?>
 </body>
-
 </html>

@@ -2,7 +2,7 @@
 function getProducts()
 {
     try {
-        $url = "http://localhost/server/systemPost/api/inventories/products?status=activo";
+        $url = "https://systempost.onrender.com/api/inventories/products?status=activo";
         $response = file_get_contents($url);
         $data = json_decode($response, true);
 
@@ -769,7 +769,7 @@ function formatText($text)
                     }))
                 };
 
-                const response = await fetch('http://localhost/server/systemPost/api/sales', {
+                const response = await fetch('https://systempost.onrender.com/api/sales', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -796,7 +796,7 @@ function formatText($text)
                         showConfirmButton: false,
                         showCancelButton: false,
                     }).then(() => {
-                        window.location.href = 'http://localhost/server/systemPost/ventas';
+                        window.location.href = 'https://systempost.onrender.com/ventas';
                     });
                 } else {
                     Swal.fire({

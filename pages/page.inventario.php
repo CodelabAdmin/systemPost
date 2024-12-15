@@ -2,7 +2,7 @@
 function countProducts()
 {
     try {
-        $url = "http://localhost/server/systemPost/api/inventories/products/count";
+        $url = "https://systempost.onrender.com/api/inventories/products/count";
         $response = file_get_contents($url);
         $data = json_decode($response, true);
 

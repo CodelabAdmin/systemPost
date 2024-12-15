@@ -1,12 +1,26 @@
 <?php
 class conn extends mysqli
 {
-	function __construct()
-	{
-		parent::__construct("junction.proxy.rlwy.net", "root", "ruWRVbUxmnvKTYWmqqoZJAIbxKGmrSWE", "railway", 51007);
-		if (mysqli_connect_error()) {
-			die("Error de conexión: " . mysqli_connect_error());
-		}
-	}
+    function __construct()
+    {
+        // Evitamos warnings de conexión
+        error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
+        
+        parent::__construct(
+            "junction.proxy.rlwy.net",
+            "root", 
+            "ruWRVbUxmnvKTYWmqqoZJAIbxKGmrSWE", 
+            "railway", 
+            51007
+        );
+
+        if ($this->connect_error) {
+            die(json_encode(['error' => 'Error de conexión: ' . $this->connect_error]));
+        }
+
+        $this->set_charset("utf8");
+    }
 }
+
 $conn = new conn();
+?>

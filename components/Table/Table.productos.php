@@ -1,21 +1,50 @@
 <?php
 function getProducts()
 {
-   try {
-      $url = "http://localhost/server/systemPost/api/products";
-      $response = file_get_contents($url);
-      $data = json_decode($response, true);
-
-      if ($data && isset($data['products'])) {
-         return $data['products'];
-      } else {
-         return [];
-      }
-   } catch (Exception $e) {
-      throw new Exception("Error al cargar los productos: " . $e->getMessage());
-      return [];
-   }
+    try {
+       
+        // Construir la URL de la API
+        $url = "https://systempost.onrender.com/api/products";
+        
+        // Configurar el contexto de la petición
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'GET',
+                'header' => 'Content-Type: application/json',
+                'ignore_errors' => true,
+                'timeout' => 30
+            ]
+        ]);
+        
+        // Realizar la petición
+        $response = file_get_contents($url, false, $context);
+        
+        if ($response === FALSE) {
+            error_log("Error al obtener productos: No se pudo conectar con la API");
+            return [];
+        }
+        
+        // Decodificar la respuesta
+        $data = json_decode($response, true);
+        
+        // Verificar si la respuesta es válida
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            error_log("Error al decodificar JSON: " . json_last_error_msg());
+            return [];
+        }
+        
+        // Verificar si hay productos en la respuesta
+        if ($data && isset($data['products'])) {
+            return $data['products'];
+        }
+        
+        return [];
+    } catch (Exception $e) {
+        error_log("Error en getProducts: " . $e->getMessage());
+        return [];
+    }
 }
+
 
 $productos = getProducts();
 if (!is_array($productos)) {
@@ -109,6 +138,19 @@ $activo = false;
                               <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
                            </svg>
                         </button>
+                        <?php if ($producto['status'] === 'activo'): ?>
+                            <button class="btn-accions delete" onclick="cambiarEstadoProducto(<?php echo $producto['id_product']; ?>, 'desactivar')">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
+                                    <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72z"/>
+                                </svg>
+                            </button>
+                        <?php else: ?>
+                            <button class="btn-accions activate" onclick="cambiarEstadoProducto(<?php echo $producto['id_product']; ?>, 'activar')">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
+                                    <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-.53 14.03a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 1 1 1.06-1.06l2.47 2.47 5.47-5.47a.75.75 0 1 1 1.06 1.06l-6 6z"/>
+                                </svg>
+                            </button>
+                        <?php endif; ?>
                      </td>
                   </tr>
                <?php endforeach; ?>
@@ -139,6 +181,26 @@ $activo = false;
    </div>
 </div>
 
+<!-- Modales actualizados con clases más específicas -->
+<div id="confirmModal" class="modal-estado-producto">
+    <div class="modal-estado-content">
+        <h2 id="modal-estado-title" class="modal-estado-title"></h2>
+        <p id="modal-estado-message" class="modal-estado-message"></p>
+        <div class="modal-estado-buttons">
+            <button id="modal-estado-confirm" class="btn-estado-primary">Confirmar</button>
+            <button id="modal-estado-cancel" class="btn-estado-secondary">Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<div id="resultModal" class="modal-resultado-producto">
+    <div class="modal-resultado-content">
+        <h2 id="result-estado-title" class="modal-resultado-title"></h2>
+        <p id="result-estado-message" class="modal-resultado-message"></p>
+        <button id="result-estado-ok" class="btn-estado-primary">Aceptar</button>
+    </div>
+</div>
+
 <script>
    function editarProducto(producto) {
       // Primero abrimos el modal
@@ -152,4 +214,70 @@ $activo = false;
       document.getElementById('edit-categoria').value = producto.category;
    //  document.getElementById('edit-status').value = producto.status;
    }
+
+   function mostrarModalConfirmacion(mensaje, onConfirm) {
+        const modal = document.getElementById('confirmModal');
+        const modalMessage = document.getElementById('modal-estado-message');
+        const btnConfirm = document.getElementById('modal-estado-confirm');
+        const btnCancel = document.getElementById('modal-estado-cancel');
+
+        modalMessage.textContent = mensaje;
+        modal.style.display = 'flex';
+
+        btnConfirm.onclick = () => {
+            modal.style.display = 'none';
+            onConfirm();
+        };
+
+        btnCancel.onclick = () => {
+            modal.style.display = 'none';
+        };
+    }
+
+    function mostrarModalResultado(titulo, mensaje, onClose = null) {
+        const modal = document.getElementById('resultModal');
+        const titleElement = document.getElementById('result-estado-title');
+        const messageElement = document.getElementById('result-estado-message');
+        const btnOk = document.getElementById('result-estado-ok');
+
+        titleElement.textContent = titulo;
+        messageElement.textContent = mensaje;
+        modal.style.display = 'flex';
+
+        btnOk.onclick = () => {
+            modal.style.display = 'none';
+            if (onClose) onClose();
+        };
+    }
+
+    function cambiarEstadoProducto(id, accion) {
+        const mensaje = accion === 'activar' ? 
+            '¿Estás seguro de que deseas activar este producto?' : 
+            '¿Estás seguro de que deseas desactivar este producto?';
+
+        mostrarModalConfirmacion(mensaje, () => {
+            const endpoint = accion === 'activar' ? 
+                `http://localhost/server/systemPost/api/products/active?id=${id}` : 
+                `http://localhost/server/systemPost/api/products/deactive?id=${id}`;
+
+            fetch(endpoint, {
+                method: 'PATCH'
+            })
+            .then(async response => {
+                if (response.ok) {
+                    mostrarModalResultado(
+                        'Éxito',
+                        `Producto ${accion === 'activar' ? 'activado' : 'desactivado'} correctamente`,
+                        () => location.reload()
+                    );
+                } else {
+                    mostrarModalResultado('Error', `Error al ${accion} el producto.`);
+                }
+            })
+            .catch(error => {
+                mostrarModalResultado('Error', 'Ha ocurrido un error en la operación.');
+                console.error('Error:', error);
+            });
+        });
+    }
 </script>

@@ -15,16 +15,16 @@
             <form id="product-form" class="content-form">
                 <div class="container-product">
                     <div class="column">
-                        <input type="tetx" placeholder="Nombre" name="nombre" class="input-product">
-                        <input type="num" placeholder="Precio" name="precio" class="input-product">
-                        <input type="num" placeholder="Stock" name="stock" class="input-product">
-                        <select name="proveedor" required>
+                        <input type="text" placeholder="Nombre" name="nombre" id="nombre" class="input-product">
+                        <input type="number" placeholder="Precio" name="precio" id="precio" class="input-product">
+                        <input type="number" placeholder="Stock" name="stock" id="stock" class="input-product">
+                        <select name="proveedor" id="proveedor" required>
                             <option value="" selected disabled>Selecciona un proveedor</option>
                             <option value="1">Proveedor 1</option>
                         </select>
                     </div>
                     <div class="column">
-                        <select name="categoria" required>
+                        <select name="categoria" id="categoria" required>
                             <option value="" selected disabled>Selecciona una categoría</option>
                             <option value="Alimentos">Alimentos</option>
                             <option value="Bebidas">Bebidas</option>
@@ -37,7 +37,7 @@
                             <option value="Otros">Otros</option>
                         </select>
                         
-                        <textarea placeholder="Descripción" name="descripcion" class="input-product textarea"></textarea>
+                        <textarea placeholder="Descripción" name="descripcion" id="descripcion" class="input-product textarea"></textarea>
                     </div>
                 </div>
             </form>
@@ -52,11 +52,11 @@
         async function addProduct() {
             try {
                 // Validar campos requeridos
-                const nombre = document.querySelector('input[name="nombre"]').value;
-                const precio = document.querySelector('input[name="precio"]').value;
-                const stock = document.querySelector('input[name="stock"]').value;
-                const categoria = document.querySelector('select[name="categoria"]').value;
-                const descripcion = document.querySelector('textarea[name="descripcion"]').value;
+                const nombre = document.querySelector('input[id="nombre"]').value;
+                const precio = document.querySelector('input[id="precio"]').value;
+                const stock = document.querySelector('input[id="stock"]').value;
+                const categoria = document.querySelector('select[id="categoria"]').value;
+                const descripcion = document.querySelector('textarea[id="descripcion"]').value;
 
                 // Validar que los campos no estén vacíos
                 if (!nombre || !precio || !stock || !categoria) {
@@ -90,7 +90,7 @@
                     return;
                 }
 
-                const proveedorId = document.querySelector('select[name="proveedor"]').value;
+                const proveedorId = document.querySelector('select[id="proveedor"]').value;
 
                 const productData = {
                     name: nombre.trim(),

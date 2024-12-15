@@ -2,7 +2,7 @@
 function getUser()
 {
    try {
-      $url = "http://localhost/server/systemPost/api/users";
+      $url = "https://systempost.onrender.com/api/users";
       $response = file_get_contents($url);
       $data = json_decode($response, true);
 

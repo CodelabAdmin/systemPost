@@ -2,16 +2,41 @@
 function countProducts()
 {
     try {
-        $url = "http://localhost/server/systemPost/api/products/count";
-        $response = file_get_contents($url);
+        // Construir la URL completa
+        $url = "https://systempost.onrender.com/api/products/count";
+        
+        // Configurar el contexto para manejar posibles errores
+        $context = stream_context_create([
+            'http' => [
+                'ignore_errors' => true,
+                'timeout' => 30
+            ]
+        ]);
+        
+        $response = file_get_contents($url, false, $context);
+        
+        if ($response === FALSE) {
+            throw new Exception("Error al obtener datos");
+        }
+        
         $data = json_decode($response, true);
-
-        return ['count' => $data["COUNT(*)"]];
+        
+        if (isset($data["COUNT(*)"]) && $data["COUNT(*)"] !== null) {
+            return ['count' => $data["COUNT(*)"]];
+        } else {
+            return ['count' => 0];
+        }
     } catch (Exception $e) {
+        error_log("Error en countProducts: " . $e->getMessage());
         return ['count' => 0];
     }
 }
+
+// Asegurarnos de que countProducts() devuelva siempre un array válido
 $countProducts = countProducts();
+if (!is_array($countProducts) || !isset($countProducts['count'])) {
+    $countProducts = ['count' => 0];
+}
 ?>
 
 <style>

@@ -53,12 +53,12 @@
    async function editProduct() {
     try {
         // Validar campos requeridos+
-        const productId = document.querySelector('input[name="id"]').value;
-        const nombre = document.querySelector('input[name="nombre"]').value;
-        const precio = document.querySelector('input[name="precio"]').value;
-        const stock = document.querySelector('input[name="stock"]').value;
-        const categoria = document.querySelector('select[name="categoria"]').value;
-        const descripcion = document.querySelector('textarea[name="descripcion"]').value;
+        const productId = document.querySelector('input[id="edit-id"]').value;
+        const nombre = document.querySelector('input[id="edit-nombre"]').value;
+        const precio = document.querySelector('input[id="edit-precio"]').value;
+        const stock = document.querySelector('input[id="edit-stock"]').value;
+        const categoria = document.querySelector('select[id="edit-categoria"]').value;
+        const descripcion = document.querySelector('textarea[id="edit-descripcion"]').value;
 
         // Validar que los campos no estén vacíos
         if (!nombre || !precio || !stock || !categoria) {
@@ -117,7 +117,7 @@
             }
         });
 
-        const response = await fetch(`http://localhost/server/systemPost/api/products?id=${productId}`, {
+        const response = await fetch(`https://systempost.onrender.com/api/products?id=${productId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
