@@ -95,7 +95,14 @@
     height: 550px;
 }
 
-.page-empleados .container-header-empleados .buttom{
+.page-empleados .container-header-empleados .content-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.page-empleados .container-header-empleados .button {
     width: 100px;
     height: 30px;
     background-color: #6668C5;
@@ -106,5 +113,41 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 20px;
-    margin-top: 20px;
+}
+.content-modal .content-form .content-buttons-users{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 10px;
+}
+
+.content-modal .content-form .content-buttons-users .btn-modal{
+    width: 90px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.content-modal .content-form .content-buttons-users .button-cancel{
+    background-color: rgb(244, 55, 55);
+}
+
+.content-modal .content-form .content-buttons-users .button-confirm{
+    background-color: rgb(74, 148, 245);
+}
+
+.content-modal .content-form .content-buttons-users .button-cancel:hover{
+    background-color: rgb(248, 35, 35);
+}
+
+.content-modal .content-form .content-buttons-users .button-confirm:hover{
+    background-color: rgb(29, 120, 240);
 }

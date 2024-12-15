@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-buttons">
+                <div class="content-buttons-users">
                     <button type="button" class="btn-modal button-cancel" onclick="toggleModal()">Cancelar</button>
                     <button type="submit" class="btn-modal button-confirm">Agregar</button>
                 </div>
