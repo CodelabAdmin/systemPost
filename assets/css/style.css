@@ -524,6 +524,15 @@
     visibility: visible;
 }
 
+.component-menu .menu-options .option.active {
+    stroke: #99A5E0;
+    transform: scale(1.1);
+}
+
+.component-menu .menu-options .option.active svg {
+    color: #99A5E0;
+    stroke: #99A5E0;
+}
 
 /* estilos de tabla */
 
