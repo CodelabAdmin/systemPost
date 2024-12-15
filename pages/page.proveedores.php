@@ -52,6 +52,6 @@ $countSuppliers = countSuppliers();
             <?php require('./components/Table/Table.proveedores.php') ?>   
         </div>
     </div>
+    <?php require('./components/Modal/Modal.proveedor.php'); ?>
+    <?php require('./components/Modal/Modal.editarProveedor.php'); ?>
 </div>
-
-<?php require('./components/Modal/Modal.proveedor.php') ?>

@@ -9,3 +9,8 @@ if($request == 'POST'){
    $response = $sales->create($data['id_user'],$data['sales']);
    echo json_encode($response);
 }
+
+if($request == 'GET'){
+    $response = $sales->getSales();
+    echo json_encode($response);
+}

@@ -5,12 +5,14 @@ require_once 'users.php';
 
 class SalesModel
 {
+
     private $conn;
     private $inventoriesModel;
     private $usersModel;
 
     public function __construct()
     {
+        date_default_timezone_set('America/Bogota');
         global $conn;
         $this->conn = $conn;
         $this->usersModel = new usersModel();
@@ -42,7 +44,7 @@ class SalesModel
             $id_product = $sale["id_product"];
             $quantity = $sale["quantity"];
 
-            if($quantity < 1){
+            if ($quantity < 1) {
                 http_response_code(400);
                 return ["status" => "error", "message" => "La cantidad debe ser mayor a 0."];
             }
@@ -142,7 +144,7 @@ class SalesModel
                   FROM sales s 
                   INNER JOIN users u ON s.id_user = u.id_user 
                   WHERE s.id_sale = ?";
-                  
+
         $stmt = $this->conn->prepare($query);
         if (!$stmt) {
             http_response_code(500);
@@ -176,7 +178,7 @@ class SalesModel
                   FROM sale_details sd
                   INNER JOIN products p ON sd.id_product = p.id_product 
                   WHERE sd.id_sale = ?";
-                  
+
         $stmt = $this->conn->prepare($query);
         if (!$stmt) {
             http_response_code(500);
@@ -185,11 +187,11 @@ class SalesModel
                 "message" => "Error al preparar la consulta: " . $this->conn->error
             ];
         }
-        
+
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         if ($result->num_rows === 0) {
             http_response_code(404);
             return [
@@ -197,7 +199,7 @@ class SalesModel
                 "message" => "No se encontró ningún detalle de venta con el ID proporcionado."
             ];
         }
-        
+
         return [
             "status" => "ok",
             "data" => $result->fetch_all(MYSQLI_ASSOC)
@@ -259,6 +261,41 @@ class SalesModel
         return [
             "status" => "ok",
             "message" => "Stock actualizado correctamente.",
+        ];
+    }
+
+    public function getSales()
+    {
+        $query = "SELECT s.*, u.fullname 
+                  FROM sales s 
+                  INNER JOIN users u ON s.id_user = u.id_user 
+                  ORDER BY s.id_sale DESC";
+
+        $stmt = $this->conn->prepare($query);
+        if (!$stmt) {
+            http_response_code(500);
+            return [
+                "status" => "error",
+                "message" => "Error al preparar la consulta: " . $this->conn->error
+            ];
+        }
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $sales = $result->fetch_all(MYSQLI_ASSOC);
+
+        // Configurar zona horaria
+        date_default_timezone_set('America/Bogota');
+
+        // Formatear las fechas
+        foreach ($sales as &$sale) {
+            $date = new DateTime($sale['sale_at']);
+            $sale['created_at'] = $date->format('d/m/Y h:i A');
+        }
+
+        return [
+            "status" => "ok",
+            "data" => $sales
         ];
     }
 }
