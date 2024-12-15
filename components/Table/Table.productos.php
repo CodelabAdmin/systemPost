@@ -257,8 +257,8 @@ $activo = false;
 
         mostrarModalConfirmacion(mensaje, () => {
             const endpoint = accion === 'activar' ? 
-                `http://localhost/server/systemPost/api/products/active?id=${id}` : 
-                `http://localhost/server/systemPost/api/products/deactive?id=${id}`;
+                `https://systempost.onrender.com/api/products/active?id=${id}` : 
+                `https://systempost.onrender.com/api/products/deactive?id=${id}`;
 
             fetch(endpoint, {
                 method: 'PATCH'
