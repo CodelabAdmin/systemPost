@@ -9,9 +9,9 @@ class conn extends mysqli
         parent::__construct(
             "junction.proxy.rlwy.net",
             "root", 
-            "ruWRVbUxmnvKTYWmqqoZJAIbxKGmrSWE", 
+            "MhXMiQRTcctebVLvEEgthZpRgdSriHKQ",
             "railway", 
-            51007
+            25354
         );
 
         if ($this->connect_error) {
